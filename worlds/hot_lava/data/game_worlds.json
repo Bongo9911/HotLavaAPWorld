@@ -1,251 +1,222 @@
 [
-  {
-    "Name": "Gym Class",
-    "Courses": [
-      {
-        "Name": "Gym Jam",
-        "CourseType": 0,
-        "Stars": [
-          {
-            "UnlockableId": "8e72934736772e94eaa50290f7ae341a",
-            "Name": "Complete the course"
-          },
-          {
-            "UnlockableId": "2c2765d96036f40438807ce21e92b229",
-            "Name": "Complete in under 08:00"
-          },
-          {
-            "UnlockableId": "2b6db09b813d3f54cb1424cbf312ca8d",
-            "Name": "Complete in under 02:10"
-          },
-          {
-            "UnlockableId": "e7991396471eede4d82f90334472ae2d",
-            "Name": "Reach a speed of 9"
-          },
-          {
-            "UnlockableId": "2f492a67f28d82c429c93fa9e48bfe3e",
-            "Name": "No Deaths"
-          },
-          {
-            "UnlockableId": "718fac78ec94caa478f347b892adae7a",
-            "Name": "Grab the golden pin"
-          },
-          {
-            "UnlockableId": "7680ae1ce1a1c1f49afc80c4e50df8a1",
-            "Name": "Buddy Mode"
-          }
+    {
+        "Name": "Gym Class",
+        "Courses": [
+            {
+                "Name": "Gym Jam",
+                "CourseType": 0,
+                "Stars": [
+                    {
+                        "Name": "Complete the course"
+                    },
+                    {
+                        "Name": "Complete in under 08:00"
+                    },
+                    {
+                        "Name": "Complete in under 02:10"
+                    },
+                    {
+                        "Name": "Reach a speed of 9"
+                    },
+                    {
+                        "Name": "No Deaths"
+                    },
+                    {
+                        "Name": "Grab the golden pin"
+                    },
+                    {
+                        "Name": "Buddy Mode"
+                    }
+                ]
+            },
+            {
+                "Name": "Trampoline Trouble",
+                "CourseType": 0,
+                "Stars": [
+                    {
+                        "Name": "Complete the course"
+                    },
+                    {
+                        "Name": "Complete in under 02:30"
+                    },
+                    {
+                        "Name": "Complete in under 01:00"
+                    },
+                    {
+                        "Name": "Don't perform any swings"
+                    },
+                    {
+                        "Name": "No Deaths"
+                    },
+                    {
+                        "Name": "Grab the golden pin"
+                    },
+                    {
+                        "Name": "Buddy Mode"
+                    }
+                ]
+            },
+            {
+                "Name": "Livin' on the Ledge",
+                "CourseType": 0,
+                "Stars": [
+                    {
+                        "Name": "Complete the course"
+                    },
+                    {
+                        "Name": "Complete in under 02:00"
+                    },
+                    {
+                        "Name": "Complete in under 00:55"
+                    },
+                    {
+                        "Name": "Spend less than 25 seconds on the ground"
+                    },
+                    {
+                        "Name": "No Deaths"
+                    },
+                    {
+                        "Name": "Grab the golden pin"
+                    },
+                    {
+                        "Name": "Buddy Mode"
+                    }
+                ]
+            },
+            {
+                "Name": "Surfing Surfaces",
+                "CourseType": 0,
+                "Stars": [
+                    {
+                        "Name": "Complete the course"
+                    },
+                    {
+                        "Name": "Complete in under 01:50"
+                    },
+                    {
+                        "Name": "Complete in under 00:50"
+                    },
+                    {
+                        "Name": "Reach a speed of 10.5"
+                    },
+                    {
+                        "Name": "No Deaths"
+                    },
+                    {
+                        "Name": "Grab the golden pin"
+                    },
+                    {
+                        "Name": "Buddy Mode"
+                    }
+                ]
+            },
+            {
+                "Name": "Pole Vault",
+                "CourseType": 0,
+                "Stars": [
+                    {
+                        "Name": "Complete the course"
+                    },
+                    {
+                        "Name": "Complete in under 02:30"
+                    },
+                    {
+                        "Name": "Complete in under 01:10"
+                    },
+                    {
+                        "Name": "Spend less than 30 seconds on the ground"
+                    },
+                    {
+                        "Name": "No Deaths"
+                    },
+                    {
+                        "Name": "Grab the golden pin"
+                    },
+                    {
+                        "Name": "Buddy Mode"
+                    }
+                ]
+            },
+            {
+                "Name": "Chase Your Sister",
+                "CourseType": 0,
+                "Stars": [
+                    {
+                        "Name": "Complete the course"
+                    },
+                    {
+                        "Name": "Complete in under 01:10"
+                    },
+                    {
+                        "Name": "Complete in under 00:45"
+                    },
+                    {
+                        "Name": "Don't perform any swings"
+                    },
+                    {
+                        "Name": "Tag your sister"
+                    },
+                    {
+                        "Name": "Grab the golden pin"
+                    },
+                    {
+                        "Name": "Buddy Mode"
+                    }
+                ]
+            },
+            {
+                "Name": "Pogo Trial",
+                "CourseType": 1,
+                "Stars": [
+                    {
+                        "Name": "Find all the checkpoints using the Pogo Stick"
+                    }
+                ]
+            },
+            {
+                "Name": "Tiny Toy Trial",
+                "CourseType": 2,
+                "Stars": [
+                    {
+                        "Name": "Get to the finish line"
+                    }
+                ]
+            },
+            {
+                "Name": "Jetpack Trial",
+                "CourseType": 3,
+                "Stars": [
+                    {
+                        "Name": "Find all the checkpoints using the Jetpack"
+                    }
+                ]
+            },
+            {
+                "Name": "All Course Marathon",
+                "CourseType": 5,
+                "Stars": [
+                    {
+                        "Name": "Complete the course"
+                    }
+                ]
+            }
+        ],
+        "ForceFields": [
+            {
+                "Name": "Gym/Office Hallway"
+            },
+            {
+                "Name": "Office Hallway/Janitor's Closet"
+            },
+            {
+                "Name": "Office Hallway/Back Hallway"
+            },
+            {
+                "Name": "Computer Lab Hallway/Back Hallway"
+            },
+            {
+                "Name": "Back Hallway/Side Entrance"
+            }
         ]
-      },
-      {
-        "Name": "Trampoline Trouble",
-        "CourseType": 0,
-        "Stars": [
-          {
-            "UnlockableId": "52813bff26455a34c92918c183c034fe",
-            "Name": "Complete the course"
-          },
-          {
-            "UnlockableId": "181644ae625180e4eb6989129d83e2fb",
-            "Name": "Complete in under 02:30"
-          },
-          {
-            "UnlockableId": "3262cf7f58754504dbb378912ea87f07",
-            "Name": "Complete in under 01:00"
-          },
-          {
-            "UnlockableId": "0059648cfcaf1d3459f89b8b76db5eef",
-            "Name": "Don't perform any swings"
-          },
-          {
-            "UnlockableId": "5d26c3d1697052c45a3f29ab54d8bb0d",
-            "Name": "No Deaths"
-          },
-          {
-            "UnlockableId": "1a2ff5486c095154c9bf507773051774",
-            "Name": "Grab the golden pin"
-          },
-          {
-            "UnlockableId": "540b0bdc06ed2dd4887deff906e0575f",
-            "Name": "Buddy Mode"
-          }
-        ]
-      },
-      {
-        "Name": "Livin' on the Ledge",
-        "CourseType": 0,
-        "Stars": [
-          {
-            "UnlockableId": "f2aca0ab34ef5a34fb9b3d9a52087aff",
-            "Name": "Complete the course"
-          },
-          {
-            "UnlockableId": "c689392b82845f948b1a088de15c27ab",
-            "Name": "Complete in under 02:00"
-          },
-          {
-            "UnlockableId": "513a99591da7c8f49855898242e338e7",
-            "Name": "Complete in under 00:55"
-          },
-          {
-            "UnlockableId": "dc67bb49b6bdd3f4ba6af59e7f46dc7e",
-            "Name": "Spend less than 25 seconds on the ground"
-          },
-          {
-            "UnlockableId": "df11767c8cafed7429faabbe863fac18",
-            "Name": "No Deaths"
-          },
-          {
-            "UnlockableId": "3a0ab619a819e514cb7aa6c7ceaa3175",
-            "Name": "Grab the golden pin"
-          },
-          {
-            "UnlockableId": "2b821237eb81a37448942997afb21e9e",
-            "Name": "Buddy Mode"
-          }
-        ]
-      },
-      {
-        "Name": "Surfing Surfaces",
-        "CourseType": 0,
-        "Stars": [
-          {
-            "UnlockableId": "b772330c648bc5b4dbf560e1636a765b",
-            "Name": "Complete the course"
-          },
-          {
-            "UnlockableId": "720fa9c239a1b224eae03b1dd031c9c5",
-            "Name": "Complete in under 01:50"
-          },
-          {
-            "UnlockableId": "4218afbc7f4895141a4ebd26d61272d3",
-            "Name": "Complete in under 00:50"
-          },
-          {
-            "UnlockableId": "a6179cec5a395964a807d262ec059a9e",
-            "Name": "Reach a speed of 10.5"
-          },
-          {
-            "UnlockableId": "5bd4d45837fdac649965d0e2b89e63d7",
-            "Name": "No Deaths"
-          },
-          {
-            "UnlockableId": "7ed7e2810fd00a14aaea4f267e33400e",
-            "Name": "Grab the golden pin"
-          },
-          {
-            "UnlockableId": "d2a264a37b85ab045a885dc98fa2ad56",
-            "Name": "Buddy Mode"
-          }
-        ]
-      },
-      {
-        "Name": "Pole Vault",
-        "CourseType": 0,
-        "Stars": [
-          {
-            "UnlockableId": "b854fd83bb9c6b2438d05cfdaba66a91",
-            "Name": "Complete the course"
-          },
-          {
-            "UnlockableId": "3bb1fbe4b84c03a4086c6ac366f2ba27",
-            "Name": "Complete in under 02:30"
-          },
-          {
-            "UnlockableId": "f89d1fb8ad92a634d8703d0b8bb1c976",
-            "Name": "Complete in under 01:10"
-          },
-          {
-            "UnlockableId": "6bc239d7f01e9ee40a4ce3687f205482",
-            "Name": "Spend less than 30 seconds on the ground"
-          },
-          {
-            "UnlockableId": "f8a55461338a712468a59dcd64888350",
-            "Name": "No Deaths"
-          },
-          {
-            "UnlockableId": "5101c9e9015f4204bb42649a58127217",
-            "Name": "Grab the golden pin"
-          },
-          {
-            "UnlockableId": "b6fb416d4c5c4984db326bab8e23079a",
-            "Name": "Buddy Mode"
-          }
-        ]
-      },
-      {
-        "Name": "Chase Your Sister",
-        "CourseType": 0,
-        "Stars": [
-          {
-            "UnlockableId": "39d3e311aa4b8dc4e92da8ec2fc093e1",
-            "Name": "Complete the course"
-          },
-          {
-            "UnlockableId": "46a134cc36e348d4eb3416dc4f9df9de",
-            "Name": "Complete in under 01:10"
-          },
-          {
-            "UnlockableId": "f6a106bb664df5a4089b4fa5101f0152",
-            "Name": "Complete in under 00:45"
-          },
-          {
-            "UnlockableId": "34f041456579a904a98c746ea6e6bb2e",
-            "Name": "Don't perform any swings"
-          },
-          {
-            "UnlockableId": "34a0bf50ab8394f46a9a94542fbfc553",
-            "Name": "Tag your sister"
-          },
-          {
-            "UnlockableId": "a45613d4c2daadb4aa581548048d2c7a",
-            "Name": "Grab the golden pin"
-          },
-          {
-            "UnlockableId": "078d212bcd4e55a4f9fe32de2cf0ad2b",
-            "Name": "Buddy Mode"
-          }
-        ]
-      },
-      {
-        "Name": "Pogo Trial",
-        "CourseType": 1,
-        "Stars": [
-          {
-            "UnlockableId": "5069ece9ed4a8ed479d1743620a34023",
-            "Name": "Find all the checkpoints using the Pogo Stick"
-          }
-        ]
-      },
-      {
-        "Name": "Tiny Toy Trial",
-        "CourseType": 2,
-        "Stars": [
-          {
-            "UnlockableId": "98310f580476ff04384f6abd4357370e",
-            "Name": "Get to the finish line"
-          }
-        ]
-      },
-      {
-        "Name": "Jetpack Trial",
-        "CourseType": 3,
-        "Stars": [
-          {
-            "UnlockableId": "62137bb4c16995d4aaf2f385225156e8",
-            "Name": "Find all the checkpoints using the Jetpack"
-          }
-        ]
-      },
-      {
-        "Name": "All Course Marathon",
-        "CourseType": 5,
-        "Stars": [
-          {
-            "UnlockableId": "e9ee84430ecf11740beb41326451d414",
-            "Name": "Complete the course"
-          }
-        ]
-      }
-    ]
-  }
+    }
 ]

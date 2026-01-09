@@ -1,53 +1,73 @@
-import pkgutil
-from typing import Any, Dict, List, Union
-import orjson
-from BaseClasses import Location
+from BaseClasses import Location, LocationProgressType
+from .Data import load_world_data
+from .CourseType import CourseType
 
 
 class HotLavaLocation(Location):
     game: str = "Hot Lava"
 
-
-locations_by_world: dict = None
-
-def load_json_data(data_name: str) -> Union[List[Any], Dict[str, Any]]:
-    return orjson.loads(pkgutil.get_data(__name__, "data/" + data_name).decode("utf-8-sig"))
-
-def build_locations_from_json():
-    global locations_by_world
+class HotLavaLocationInfo():
+    id: int
+    name: str
+    progressType: LocationProgressType
     
-    worlds = load_json_data("game_worlds.json")
+    def __init__(self, id, name, progressType = LocationProgressType.DEFAULT):
+        self.id = id
+        self.name = name
+        self.progressType = progressType
 
-    locations_by_world = {}
+courses_by_world: dict[str, dict[str, list[HotLavaLocationInfo]]] = None
+
+def build_locations_from_json():   
+    worlds = load_world_data()
+
+    courses_by_world = {}
 
     worldIdOffset = 100
     for world in worlds:
-        location_table = {}
-        locations_by_world[world["Name"]] = location_table
+        course_table: dict[str, dict[str, HotLavaLocationInfo]] = {}
+        courses_by_world[world["Name"]] = course_table
 
         courseIdOffset = 0
         for course in world["Courses"]:
+            location_list: list[HotLavaLocationInfo] = []
+            course_table[course["Name"]] = location_list
+            
             for index, star in enumerate(course["Stars"]):
-                # TODO: These should be filtered out later so that IDs don't get messed up
-                if (star["Name"] != "Buddy Mode"):
-                    location_table[world["Name"] + " - " + course["Name"] + " - " + star["Name"]] = worldIdOffset + courseIdOffset + index
-                    print(world["Name"] + " - " + course["Name"] + " - " + star["Name"])
-                    print(worldIdOffset + courseIdOffset + index)
+                progressType: LocationProgressType = LocationProgressType.DEFAULT
+                if (course["CourseType"] == CourseType.Standard.value and index == 0):
+                    progressType = LocationProgressType.PRIORITY
+                elif ("Buddy" in star["Name"] or course["CourseType"] == CourseType.AllCourseMarathon.value):
+                    progressType = LocationProgressType.EXCLUDED
+                
+                name: str = world["Name"] + " - " + course["Name"] + " - " + star["Name"]
+                location: HotLavaLocationInfo = HotLavaLocationInfo(worldIdOffset + courseIdOffset + index, name, progressType)
+                location_list.append(location)
 
-            if (course["CourseType"] == 0):
+            if (course["CourseType"] == CourseType.Standard.value):
                 courseIdOffset += 10
             else:
                 courseIdOffset += 1
         
         worldIdOffset += 100
-    return locations_by_world
+    return courses_by_world
 
-def get_all_locations():
-    global locations_by_world
+def get_courses_by_world():
+    global courses_by_world
     
-    if (locations_by_world == None):
-        locations_by_world = build_locations_from_json()
-    return locations_by_world
+    if (courses_by_world == None):
+        courses_by_world = build_locations_from_json()
+    return courses_by_world
 
-def get_locations_for_world(world_name):
-    return get_all_locations()[world_name]
+def get_location_name_to_id_for_world(world_name):
+    courses = get_courses_by_world()[world_name]
+    loc_list: list[HotLavaLocationInfo] = []
+    for d in courses:
+        loc_list.extend(courses[d])
+    return { location.name: location.id for location in loc_list }
+
+def get_location_name_to_id_for_course(world_name, course_name):
+    return { location.name: location.id for location in get_courses_by_world()[world_name][course_name] }
+
+def get_locations_info_for_course(world_name, course_name) -> list[HotLavaLocationInfo]:
+    return get_courses_by_world()[world_name][course_name]
