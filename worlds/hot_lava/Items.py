@@ -27,7 +27,9 @@ def build_locations_from_json():
         world_table: dict[str, HotLavaItemData] = {}
         items_by_world[world["Name"]] = world_table
         
-        # TODO World Unlock item
+        world_unlock_name = "World Unlock - " + world["Name"]
+        world_table[world_unlock_name] = HotLavaItemData(worldIdOffset, ItemClassification.progression)
+        
         itemIdOffset = 1
         for index, forceField in enumerate(world["ForceFields"]):
             name = world["Name"] + " - Force Field Deactivate - " + forceField["Name"]

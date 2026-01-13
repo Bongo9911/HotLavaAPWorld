@@ -59,6 +59,16 @@ def get_courses_by_world():
         courses_by_world = build_locations_from_json()
     return courses_by_world
 
+def get_location_name_to_id_for_all():
+    courses_by_world = get_courses_by_world()
+    
+    loc_list: list[HotLavaLocationInfo] = []
+    for world_name in courses_by_world:
+        courses = courses_by_world[world_name]
+        for d in courses:
+            loc_list.extend(courses[d])
+    return { location.name: location.id for location in loc_list }
+
 def get_location_name_to_id_for_world(world_name):
     courses = get_courses_by_world()[world_name]
     loc_list: list[HotLavaLocationInfo] = []

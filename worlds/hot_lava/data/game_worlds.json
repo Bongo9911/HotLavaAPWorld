@@ -7,25 +7,32 @@
                 "CourseType": 0,
                 "Stars": [
                     {
-                        "Name": "Complete the course"
+                        "Name": "Complete the course",
+                        "StarType": 1
                     },
                     {
-                        "Name": "Complete in under 08:00"
+                        "Name": "Complete in under 08:00",
+                        "StarType": 0
                     },
                     {
-                        "Name": "Complete in under 02:10"
+                        "Name": "Complete in under 02:10",
+                        "StarType": 0
                     },
                     {
-                        "Name": "Reach a speed of 9"
+                        "Name": "Reach a speed of 9",
+                        "StarType": 0
                     },
                     {
-                        "Name": "No Deaths"
+                        "Name": "No Deaths",
+                        "StarType": 0
                     },
                     {
-                        "Name": "Grab the golden pin"
+                        "Name": "Grab the golden pin",
+                        "StarType": 0
                     },
                     {
-                        "Name": "Buddy Mode"
+                        "Name": "Buddy Mode",
+                        "StarType": 3
                     }
                 ]
             },
@@ -34,25 +41,32 @@
                 "CourseType": 0,
                 "Stars": [
                     {
-                        "Name": "Complete the course"
+                        "Name": "Complete the course",
+                        "StarType": 1
                     },
                     {
-                        "Name": "Complete in under 02:30"
+                        "Name": "Complete in under 02:30",
+                        "StarType": 0
                     },
                     {
-                        "Name": "Complete in under 01:00"
+                        "Name": "Complete in under 01:00",
+                        "StarType": 0
                     },
                     {
-                        "Name": "Don't perform any swings"
+                        "Name": "Don't perform any swings",
+                        "StarType": 0
                     },
                     {
-                        "Name": "No Deaths"
+                        "Name": "No Deaths",
+                        "StarType": 0
                     },
                     {
-                        "Name": "Grab the golden pin"
+                        "Name": "Grab the golden pin",
+                        "StarType": 0
                     },
                     {
-                        "Name": "Buddy Mode"
+                        "Name": "Buddy Mode",
+                        "StarType": 3
                     }
                 ]
             },
@@ -61,25 +75,32 @@
                 "CourseType": 0,
                 "Stars": [
                     {
-                        "Name": "Complete the course"
+                        "Name": "Complete the course",
+                        "StarType": 1
                     },
                     {
-                        "Name": "Complete in under 02:00"
+                        "Name": "Complete in under 02:00",
+                        "StarType": 0
                     },
                     {
-                        "Name": "Complete in under 00:55"
+                        "Name": "Complete in under 00:55",
+                        "StarType": 0
                     },
                     {
-                        "Name": "Spend less than 25 seconds on the ground"
+                        "Name": "Spend less than 25 seconds on the ground",
+                        "StarType": 0
                     },
                     {
-                        "Name": "No Deaths"
+                        "Name": "No Deaths",
+                        "StarType": 0
                     },
                     {
-                        "Name": "Grab the golden pin"
+                        "Name": "Grab the golden pin",
+                        "StarType": 0
                     },
                     {
-                        "Name": "Buddy Mode"
+                        "Name": "Buddy Mode",
+                        "StarType": 3
                     }
                 ]
             },
@@ -88,25 +109,32 @@
                 "CourseType": 0,
                 "Stars": [
                     {
-                        "Name": "Complete the course"
+                        "Name": "Complete the course",
+                        "StarType": 1
                     },
                     {
-                        "Name": "Complete in under 01:50"
+                        "Name": "Complete in under 01:50",
+                        "StarType": 0
                     },
                     {
-                        "Name": "Complete in under 00:50"
+                        "Name": "Complete in under 00:50",
+                        "StarType": 0
                     },
                     {
-                        "Name": "Reach a speed of 10.5"
+                        "Name": "Reach a speed of 10.5",
+                        "StarType": 0
                     },
                     {
-                        "Name": "No Deaths"
+                        "Name": "No Deaths",
+                        "StarType": 0
                     },
                     {
-                        "Name": "Grab the golden pin"
+                        "Name": "Grab the golden pin",
+                        "StarType": 0
                     },
                     {
-                        "Name": "Buddy Mode"
+                        "Name": "Buddy Mode",
+                        "StarType": 3
                     }
                 ]
             },
@@ -115,25 +143,32 @@
                 "CourseType": 0,
                 "Stars": [
                     {
-                        "Name": "Complete the course"
+                        "Name": "Complete the course",
+                        "StarType": 1
                     },
                     {
-                        "Name": "Complete in under 02:30"
+                        "Name": "Complete in under 02:30",
+                        "StarType": 0
                     },
                     {
-                        "Name": "Complete in under 01:10"
+                        "Name": "Complete in under 01:10",
+                        "StarType": 0
                     },
                     {
-                        "Name": "Spend less than 30 seconds on the ground"
+                        "Name": "Spend less than 30 seconds on the ground",
+                        "StarType": 0
                     },
                     {
-                        "Name": "No Deaths"
+                        "Name": "No Deaths",
+                        "StarType": 0
                     },
                     {
-                        "Name": "Grab the golden pin"
+                        "Name": "Grab the golden pin",
+                        "StarType": 0
                     },
                     {
-                        "Name": "Buddy Mode"
+                        "Name": "Buddy Mode",
+                        "StarType": 3
                     }
                 ]
             },
@@ -142,25 +177,32 @@
                 "CourseType": 0,
                 "Stars": [
                     {
-                        "Name": "Complete the course"
+                        "Name": "Complete the course",
+                        "StarType": 1
                     },
                     {
-                        "Name": "Complete in under 01:10"
+                        "Name": "Complete in under 01:10",
+                        "StarType": 0
                     },
                     {
-                        "Name": "Complete in under 00:45"
+                        "Name": "Complete in under 00:45",
+                        "StarType": 0
                     },
                     {
-                        "Name": "Don't perform any swings"
+                        "Name": "Don't perform any swings",
+                        "StarType": 0
                     },
                     {
-                        "Name": "Tag your sister"
+                        "Name": "Tag your sister",
+                        "StarType": 0
                     },
                     {
-                        "Name": "Grab the golden pin"
+                        "Name": "Grab the golden pin",
+                        "StarType": 0
                     },
                     {
-                        "Name": "Buddy Mode"
+                        "Name": "Buddy Mode",
+                        "StarType": 3
                     }
                 ]
             },
@@ -169,7 +211,8 @@
                 "CourseType": 1,
                 "Stars": [
                     {
-                        "Name": "Find all the checkpoints using the Pogo Stick"
+                        "Name": "Find all the checkpoints using the Pogo Stick",
+                        "StarType": 2
                     }
                 ]
             },
@@ -178,7 +221,8 @@
                 "CourseType": 2,
                 "Stars": [
                     {
-                        "Name": "Get to the finish line"
+                        "Name": "Get to the finish line",
+                        "StarType": 2
                     }
                 ]
             },
@@ -187,7 +231,8 @@
                 "CourseType": 3,
                 "Stars": [
                     {
-                        "Name": "Find all the checkpoints using the Jetpack"
+                        "Name": "Find all the checkpoints using the Jetpack",
+                        "StarType": 2
                     }
                 ]
             },
@@ -196,7 +241,8 @@
                 "CourseType": 5,
                 "Stars": [
                     {
-                        "Name": "Complete the course"
+                        "Name": "Complete the course",
+                        "StarType": 2
                     }
                 ]
             }
@@ -218,5 +264,285 @@
                 "Name": "Back Hallway/Side Entrance"
             }
         ]
+    },
+    {
+        "Name": "Playground",
+        "Courses": [
+            {
+                "Name": "Recess",
+                "CourseType": 0,
+                "Stars": [
+                    {
+                        "Name": "Complete the course",
+                        "StarType": 1
+                    },
+                    {
+                        "Name": "Complete in under 07:00",
+                        "StarType": 0
+                    },
+                    {
+                        "Name": "Complete in under 02:10",
+                        "StarType": 0
+                    },
+                    {
+                        "Name": "No Deaths",
+                        "StarType": 0
+                    },
+                    {
+                        "Name": "Grab the golden pin",
+                        "StarType": 0
+                    },
+                    {
+                        "Name": "Find the hidden G.A.T. comic",
+                        "StarType": 0
+                    },
+                    {
+                        "Name": "Buddy Mode",
+                        "StarType": 3
+                    }
+                ]
+            },
+            {
+                "Name": "Big Kids Side",
+                "CourseType": 0,
+                "Stars": [
+                    {
+                        "Name": "Complete the course",
+                        "StarType": 1
+                    },
+                    {
+                        "Name": "Complete in under 08:00",
+                        "StarType": 0
+                    },
+                    {
+                        "Name": "Complete in under 02:45",
+                        "StarType": 0
+                    },
+                    {
+                        "Name": "No Deaths",
+                        "StarType": 0
+                    },
+                    {
+                        "Name": "Grab the golden pin",
+                        "StarType": 0
+                    },
+                    {
+                        "Name": "Find the hidden G.A.T. comic",
+                        "StarType": 0
+                    },
+                    {
+                        "Name": "Buddy Mode",
+                        "StarType": 3
+                    }
+                ]
+            },
+            {
+                "Name": "Bouncy Castle",
+                "CourseType": 0,
+                "Stars": [
+                    {
+                        "Name": "Complete the course",
+                        "StarType": 1
+                    },
+                    {
+                        "Name": "Complete in under 04:30",
+                        "StarType": 0
+                    },
+                    {
+                        "Name": "Complete in under 01:45",
+                        "StarType": 0
+                    },
+                    {
+                        "Name": "No Deaths",
+                        "StarType": 0
+                    },
+                    {
+                        "Name": "Grab the golden pin",
+                        "StarType": 0
+                    },
+                    {
+                        "Name": "Find the hidden G.A.T. comic",
+                        "StarType": 0
+                    },
+                    {
+                        "Name": "Buddy Mode",
+                        "StarType": 3
+                    }
+                ]
+            },
+            {
+                "Name": "Back to Class",
+                "CourseType": 0,
+                "Stars": [
+                    {
+                        "Name": "Complete the course",
+                        "StarType": 1
+                    },
+                    {
+                        "Name": "Complete in under 06:00",
+                        "StarType": 0
+                    },
+                    {
+                        "Name": "Complete in under 01:45",
+                        "StarType": 0
+                    },
+                    {
+                        "Name": "No Deaths",
+                        "StarType": 0
+                    },
+                    {
+                        "Name": "Grab the golden pin",
+                        "StarType": 0
+                    },
+                    {
+                        "Name": "Find the hidden G.A.T. comic",
+                        "StarType": 0
+                    },
+                    {
+                        "Name": "Buddy Mode",
+                        "StarType": 3
+                    }
+                ]
+            },
+            {
+                "Name": "Sports Day",
+                "CourseType": 0,
+                "Stars": [
+                    {
+                        "Name": "Complete the course",
+                        "StarType": 1
+                    },
+                    {
+                        "Name": "Complete in under 01:40",
+                        "StarType": 0
+                    },
+                    {
+                        "Name": "Complete in under 01:10",
+                        "StarType": 0
+                    },
+                    {
+                        "Name": "No Deaths",
+                        "StarType": 0
+                    },
+                    {
+                        "Name": "Grab the golden pin",
+                        "StarType": 0
+                    },
+                    {
+                        "Name": "Find the hidden G.A.T. comic",
+                        "StarType": 0
+                    },
+                    {
+                        "Name": "Buddy Mode",
+                        "StarType": 3
+                    }
+                ]
+            },
+            {
+                "Name": "Chase the Big Kid",
+                "CourseType": 0,
+                "Stars": [
+                    {
+                        "Name": "Complete the course",
+                        "StarType": 1
+                    },
+                    {
+                        "Name": "Complete in under 01:15",
+                        "StarType": 0
+                    },
+                    {
+                        "Name": "Complete in under 00:58",
+                        "StarType": 0
+                    },
+                    {
+                        "Name": "Tag your sister",
+                        "StarType": 0
+                    },
+                    {
+                        "Name": "Grab the golden pin",
+                        "StarType": 0
+                    },
+                    {
+                        "Name": "Find the hidden G.A.T. comic",
+                        "StarType": 0
+                    },
+                    {
+                        "Name": "Buddy Mode",
+                        "StarType": 3
+                    }
+                ]
+            },
+            {
+                "Name": "Pogo Trial 1",
+                "CourseType": 1,
+                "Stars": [
+                    {
+                        "Name": "Find all the checkpoints using the Pogo Stick",
+                        "StarType": 2
+                    }
+                ]
+            },
+            {
+                "Name": "Pogo Trial 2",
+                "CourseType": 1,
+                "Stars": [
+                    {
+                        "Name": "Find all the checkpoints using the Pogo Stick",
+                        "StarType": 2
+                    }
+                ]
+            },
+            {
+                "Name": "Tiny Toy Trial 1",
+                "CourseType": 2,
+                "Stars": [
+                    {
+                        "Name": "Get to the finish line",
+                        "StarType": 2
+                    }
+                ]
+            },
+            {
+                "Name": "Tiny Toy Trial 2",
+                "CourseType": 2,
+                "Stars": [
+                    {
+                        "Name": "Get to the finish line",
+                        "StarType": 2
+                    }
+                ]
+            },
+            {
+                "Name": "Jetpack Trial",
+                "CourseType": 3,
+                "Stars": [
+                    {
+                        "Name": "Find all the checkpoints using the Jetpack",
+                        "StarType": 2
+                    }
+                ]
+            },
+            {
+                "Name": "Chase the Grade",
+                "CourseType": 4,
+                "Stars": [
+                    {
+                        "Name": "Complete the course",
+                        "StarType": 2
+                    }
+                ]
+            },
+            {
+                "Name": "All Course Marathon",
+                "CourseType": 5,
+                "Stars": [
+                    {
+                        "Name": "Complete the course",
+                        "StarType": 2
+                    }
+                ]
+            }
+        ],
+        "ForceFields": []
     }
 ]

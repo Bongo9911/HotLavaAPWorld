@@ -1,9 +1,10 @@
 import settings
-from typing import Callable, Optional
+
+from worlds.hot_lava.Regions import create_regions_for_all_worlds
 from .Items import HotLavaItem, get_all_items_table, get_items_by_world
-from .Locations import HotLavaLocation, HotLavaLocationInfo, get_location_name_to_id_for_world, get_locations_info_for_course
+from .Locations import get_location_name_to_id_for_all
 from .Options import HotLavaOptions
-from BaseClasses import CollectionState, Item, Tutorial, ItemClassification, Region
+from BaseClasses import Tutorial, ItemClassification, Region
 from ..AutoWorld import World, WebWorld
 
 class HotLavaWeb(WebWorld):
@@ -36,7 +37,7 @@ class HotLavaWorld(World):
     # items exist. They could be generated from json or something else. They can
     # include events, but don't have to since events will be placed manually.
     item_name_to_id = {name: data.code for name, data in get_all_items_table().items() if data.code is not None}
-    location_name_to_id = get_location_name_to_id_for_world("Gym Class")
+    location_name_to_id = get_location_name_to_id_for_all()
 
     # Items can be grouped using their names to allow easy checking if any item
     # from that group has been collected. Group names can also be used for !hint
@@ -50,61 +51,7 @@ class HotLavaWorld(World):
         menu_region = Region("Menu", self.player, self.multiworld)
         self.multiworld.regions.append(menu_region)  # or use += [menu_region...]
 
-        self.create_gym_class_regions(menu_region)
-        
-    def create_gym_class_regions(self, menu_region: Region) -> None:
-        world_name = "Gym Class"
-        
-        gym_class_spawn_region = self.create_region_for_world(world_name, "Spawn")
-        self.multiworld.regions.append(gym_class_spawn_region)
-        menu_region.connect(gym_class_spawn_region) 
-        
-        office_hallway_region = self.create_region_for_world(world_name, "Office Hallway")
-        gym_class_spawn_region.connect(office_hallway_region, rule=lambda collection: collection.has("Gym Class - Force Field Deactivate - Gym/Office Hallway", self.player))
-        
-        janitors_closet_region = self.create_region_for_world(world_name, "Janitor's Closet")
-        office_hallway_region.connect(janitors_closet_region, rule=lambda collection: collection.has("Gym Class - Force Field Deactivate - Office Hallway/Janitor's Closet", self.player))
-        
-        back_hallway_region = self.create_region_for_world(world_name, "Back Hallway")
-        office_hallway_region.connect(back_hallway_region, rule=lambda collection: collection.has("Gym Class - Force Field Deactivate - Office Hallway/Back Hallway", self.player))
-        gym_class_spawn_region.connect(back_hallway_region, rule=lambda collection: collection.has("Gym Class - Force Field Deactivate - Computer Lab Hallway/Back Hallway", self.player))
-        
-        side_entrance_region = self.create_region_for_world(world_name, "Side Entrance")
-        back_hallway_region.connect(side_entrance_region, rule=lambda collection: collection.has("Gym Class - Force Field Deactivate - Back Hallway/Side Entrance", self.player))
-        
-        self.create_region_for_course(world_name, "Gym Jam", gym_class_spawn_region)
-        self.create_region_for_course(world_name, "Trampoline Trouble", gym_class_spawn_region)
-        self.create_region_for_course(world_name, "Livin' on the Ledge", office_hallway_region)
-        self.create_region_for_course(world_name, "Surfing Surfaces", janitors_closet_region)
-        self.create_region_for_course(world_name, "Pole Vault", back_hallway_region)
-        self.create_region_for_course(world_name, "Chase Your Sister", back_hallway_region)
-        
-        self.create_region_for_course(world_name, "Tiny Toy Trial", office_hallway_region)
-        self.create_region_for_course(world_name, "Pogo Trial", janitors_closet_region)
-        self.create_region_for_course(world_name, "Jetpack Trial", back_hallway_region)
-        self.create_region_for_course(world_name, "All Course Marathon", side_entrance_region)
-        
-    def create_region_for_world(self, world_name: str, region_name: str):
-        region = Region(world_name + " - " + region_name, self.player, self.multiworld)
-        self.multiworld.regions.append(region)
-        return region
-        
-    def create_region_for_course(self, world_name: str, course_name: str, parent_region: Region, 
-                                 rule: Optional[Callable[[CollectionState], bool]] = None) -> Region:
-        region = Region(world_name + " - " + course_name , self.player, self.multiworld)
-        locationsInfo = get_locations_info_for_course(world_name, course_name)
-        for locationInfo in locationsInfo:
-            region.locations.append(self.build_location(region, locationInfo))
-            
-        self.multiworld.regions.append(region)
-        
-        parent_region.connect(region, rule=rule)
-        return region
-
-    def build_location(self, region: Region, locationInfo: HotLavaLocationInfo):
-        location = HotLavaLocation(self.player, locationInfo.name, locationInfo.id, region)
-        location.progress_type = locationInfo.progressType
-        return location
+        create_regions_for_all_worlds(self, menu_region)
 
     def create_item(self, name) -> HotLavaItem:
         data = get_all_items_table()[name]
@@ -122,12 +69,17 @@ class HotLavaWorld(World):
         # Which items are added to the pool may depend on player options, e.g. custom win condition like triforce hunt.
         # Having an item in the start inventory won't remove it from the pool.
         # If you want to do that, use start_inventory_from_pool
+        
+        # TODO: random starting world?
+        self.multiworld.push_precollected(self.create_item("World Unlock - Gym Class"))
 
         items_by_world = get_items_by_world()
         for world in items_by_world:
             for item_name in items_by_world[world]:
-                item = self.create_item(item_name)
-                self.multiworld.itempool.append(item)
+                # Don't add any pre-collected items to the pool
+                if (not any(item.name == item_name for item in self.multiworld.precollected_items[self.player])):
+                    item = self.create_item(item_name)
+                    self.multiworld.itempool.append(item)
 
         # itempool and number of locations should match up.
         # If this is not the case we want to fill the itempool with junk.
@@ -141,4 +93,5 @@ class HotLavaWorld(World):
         return total_locations
 
     def set_rules(self) -> None:
+        #TODO
         self.multiworld.completion_condition[self.player] = lambda state: any(location.name == "Gym Class - Gym Jam - Complete the course" for location in state.locations_checked)
