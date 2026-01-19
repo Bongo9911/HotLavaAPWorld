@@ -1,6 +1,6 @@
-from enum import Enum
+from enum import IntEnum
 
-class CourseType(Enum):
+class CourseType(IntEnum):
     Standard = 0
     Pogo = 1
     TinyToy = 2

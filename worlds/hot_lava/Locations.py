@@ -1,6 +1,7 @@
 from BaseClasses import Location, LocationProgressType
 from .Data import load_world_data
 from .CourseType import CourseType
+from .StarType import StarType
 
 
 class HotLavaLocation(Location):
@@ -9,11 +10,13 @@ class HotLavaLocation(Location):
 class HotLavaLocationInfo():
     id: int
     name: str
+    starType: StarType
     progressType: LocationProgressType
     
-    def __init__(self, id, name, progressType = LocationProgressType.DEFAULT):
+    def __init__(self, id, name, starType, progressType = LocationProgressType.DEFAULT):
         self.id = id
         self.name = name
+        self.starType = starType
         self.progressType = progressType
 
 courses_by_world: dict[str, dict[str, list[HotLavaLocationInfo]]] = None
@@ -35,16 +38,16 @@ def build_locations_from_json():
             
             for index, star in enumerate(course["Stars"]):
                 progressType: LocationProgressType = LocationProgressType.DEFAULT
-                if (course["CourseType"] == CourseType.Standard.value and index == 0):
+                if (course["CourseType"] == CourseType.Standard and index == 0):
                     progressType = LocationProgressType.PRIORITY
-                elif ("Buddy" in star["Name"] or course["CourseType"] == CourseType.AllCourseMarathon.value):
+                elif (star["StarType"] == StarType.Buddy or course["CourseType"] == CourseType.AllCourseMarathon):
                     progressType = LocationProgressType.EXCLUDED
                 
                 name: str = world["Name"] + " - " + course["Name"] + " - " + star["Name"]
-                location: HotLavaLocationInfo = HotLavaLocationInfo(worldIdOffset + courseIdOffset + index, name, progressType)
+                location: HotLavaLocationInfo = HotLavaLocationInfo(worldIdOffset + courseIdOffset + index, name, star["StarType"], progressType)
                 location_list.append(location)
 
-            if (course["CourseType"] == CourseType.Standard.value):
+            if (course["CourseType"] == CourseType.Standard):
                 courseIdOffset += 10
             else:
                 courseIdOffset += 1

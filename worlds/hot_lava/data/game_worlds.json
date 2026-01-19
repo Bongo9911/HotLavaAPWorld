@@ -12,27 +12,27 @@
                     },
                     {
                         "Name": "Complete in under 08:00",
-                        "StarType": 0
+                        "StarType": 2
                     },
                     {
                         "Name": "Complete in under 02:10",
-                        "StarType": 0
+                        "StarType": 2
                     },
                     {
                         "Name": "Reach a speed of 9",
-                        "StarType": 0
+                        "StarType": 4
                     },
                     {
                         "Name": "No Deaths",
-                        "StarType": 0
+                        "StarType": 3
                     },
                     {
                         "Name": "Grab the golden pin",
-                        "StarType": 0
+                        "StarType": 5
                     },
                     {
                         "Name": "Buddy Mode",
-                        "StarType": 3
+                        "StarType": 8
                     }
                 ]
             },
@@ -46,27 +46,27 @@
                     },
                     {
                         "Name": "Complete in under 02:30",
-                        "StarType": 0
+                        "StarType": 2
                     },
                     {
                         "Name": "Complete in under 01:00",
-                        "StarType": 0
+                        "StarType": 2
                     },
                     {
                         "Name": "Don't perform any swings",
-                        "StarType": 0
+                        "StarType": 4
                     },
                     {
                         "Name": "No Deaths",
-                        "StarType": 0
+                        "StarType": 3
                     },
                     {
                         "Name": "Grab the golden pin",
-                        "StarType": 0
+                        "StarType": 5
                     },
                     {
                         "Name": "Buddy Mode",
-                        "StarType": 3
+                        "StarType": 8
                     }
                 ]
             },
@@ -80,27 +80,27 @@
                     },
                     {
                         "Name": "Complete in under 02:00",
-                        "StarType": 0
+                        "StarType": 2
                     },
                     {
                         "Name": "Complete in under 00:55",
-                        "StarType": 0
+                        "StarType": 2
                     },
                     {
                         "Name": "Spend less than 25 seconds on the ground",
-                        "StarType": 0
+                        "StarType": 4
                     },
                     {
                         "Name": "No Deaths",
-                        "StarType": 0
+                        "StarType": 3
                     },
                     {
                         "Name": "Grab the golden pin",
-                        "StarType": 0
+                        "StarType": 5
                     },
                     {
                         "Name": "Buddy Mode",
-                        "StarType": 3
+                        "StarType": 8
                     }
                 ]
             },
@@ -114,27 +114,27 @@
                     },
                     {
                         "Name": "Complete in under 01:50",
-                        "StarType": 0
+                        "StarType": 2
                     },
                     {
                         "Name": "Complete in under 00:50",
-                        "StarType": 0
+                        "StarType": 2
                     },
                     {
                         "Name": "Reach a speed of 10.5",
-                        "StarType": 0
+                        "StarType": 4
                     },
                     {
                         "Name": "No Deaths",
-                        "StarType": 0
+                        "StarType": 3
                     },
                     {
                         "Name": "Grab the golden pin",
-                        "StarType": 0
+                        "StarType": 5
                     },
                     {
                         "Name": "Buddy Mode",
-                        "StarType": 3
+                        "StarType": 8
                     }
                 ]
             },
@@ -148,27 +148,27 @@
                     },
                     {
                         "Name": "Complete in under 02:30",
-                        "StarType": 0
+                        "StarType": 2
                     },
                     {
                         "Name": "Complete in under 01:10",
-                        "StarType": 0
+                        "StarType": 2
                     },
                     {
                         "Name": "Spend less than 30 seconds on the ground",
-                        "StarType": 0
+                        "StarType": 4
                     },
                     {
                         "Name": "No Deaths",
-                        "StarType": 0
+                        "StarType": 3
                     },
                     {
                         "Name": "Grab the golden pin",
-                        "StarType": 0
+                        "StarType": 5
                     },
                     {
                         "Name": "Buddy Mode",
-                        "StarType": 3
+                        "StarType": 8
                     }
                 ]
             },
@@ -182,27 +182,27 @@
                     },
                     {
                         "Name": "Complete in under 01:10",
-                        "StarType": 0
+                        "StarType": 2
                     },
                     {
                         "Name": "Complete in under 00:45",
-                        "StarType": 0
+                        "StarType": 2
                     },
                     {
                         "Name": "Don't perform any swings",
-                        "StarType": 0
+                        "StarType": 4
                     },
                     {
                         "Name": "Tag your sister",
-                        "StarType": 0
+                        "StarType": 4
                     },
                     {
                         "Name": "Grab the golden pin",
-                        "StarType": 0
+                        "StarType": 5
                     },
                     {
                         "Name": "Buddy Mode",
-                        "StarType": 3
+                        "StarType": 8
                     }
                 ]
             },
@@ -212,7 +212,7 @@
                 "Stars": [
                     {
                         "Name": "Find all the checkpoints using the Pogo Stick",
-                        "StarType": 2
+                        "StarType": 7
                     }
                 ]
             },
@@ -222,7 +222,7 @@
                 "Stars": [
                     {
                         "Name": "Get to the finish line",
-                        "StarType": 2
+                        "StarType": 7
                     }
                 ]
             },
@@ -232,7 +232,7 @@
                 "Stars": [
                     {
                         "Name": "Find all the checkpoints using the Jetpack",
-                        "StarType": 2
+                        "StarType": 7
                     }
                 ]
             },
@@ -242,7 +242,7 @@
                 "Stars": [
                     {
                         "Name": "Complete the course",
-                        "StarType": 2
+                        "StarType": 7
                     }
                 ]
             }
@@ -278,27 +278,27 @@
                     },
                     {
                         "Name": "Complete in under 07:00",
-                        "StarType": 0
+                        "StarType": 2
                     },
                     {
                         "Name": "Complete in under 02:10",
-                        "StarType": 0
+                        "StarType": 2
                     },
                     {
                         "Name": "No Deaths",
-                        "StarType": 0
+                        "StarType": 3
                     },
                     {
                         "Name": "Grab the golden pin",
-                        "StarType": 0
+                        "StarType": 5
                     },
                     {
                         "Name": "Find the hidden G.A.T. comic",
-                        "StarType": 0
+                        "StarType": 6
                     },
                     {
                         "Name": "Buddy Mode",
-                        "StarType": 3
+                        "StarType": 8
                     }
                 ]
             },
@@ -312,27 +312,27 @@
                     },
                     {
                         "Name": "Complete in under 08:00",
-                        "StarType": 0
+                        "StarType": 2
                     },
                     {
                         "Name": "Complete in under 02:45",
-                        "StarType": 0
+                        "StarType": 2
                     },
                     {
                         "Name": "No Deaths",
-                        "StarType": 0
+                        "StarType": 3
                     },
                     {
                         "Name": "Grab the golden pin",
-                        "StarType": 0
+                        "StarType": 5
                     },
                     {
                         "Name": "Find the hidden G.A.T. comic",
-                        "StarType": 0
+                        "StarType": 6
                     },
                     {
                         "Name": "Buddy Mode",
-                        "StarType": 3
+                        "StarType": 8
                     }
                 ]
             },
@@ -346,27 +346,27 @@
                     },
                     {
                         "Name": "Complete in under 04:30",
-                        "StarType": 0
+                        "StarType": 2
                     },
                     {
                         "Name": "Complete in under 01:45",
-                        "StarType": 0
+                        "StarType": 2
                     },
                     {
                         "Name": "No Deaths",
-                        "StarType": 0
+                        "StarType": 3
                     },
                     {
                         "Name": "Grab the golden pin",
-                        "StarType": 0
+                        "StarType": 5
                     },
                     {
                         "Name": "Find the hidden G.A.T. comic",
-                        "StarType": 0
+                        "StarType": 6
                     },
                     {
                         "Name": "Buddy Mode",
-                        "StarType": 3
+                        "StarType": 8
                     }
                 ]
             },
@@ -380,27 +380,27 @@
                     },
                     {
                         "Name": "Complete in under 06:00",
-                        "StarType": 0
+                        "StarType": 2
                     },
                     {
                         "Name": "Complete in under 01:45",
-                        "StarType": 0
+                        "StarType": 2
                     },
                     {
                         "Name": "No Deaths",
-                        "StarType": 0
+                        "StarType": 3
                     },
                     {
                         "Name": "Grab the golden pin",
-                        "StarType": 0
+                        "StarType": 5
                     },
                     {
                         "Name": "Find the hidden G.A.T. comic",
-                        "StarType": 0
+                        "StarType": 6
                     },
                     {
                         "Name": "Buddy Mode",
-                        "StarType": 3
+                        "StarType": 8
                     }
                 ]
             },
@@ -414,27 +414,27 @@
                     },
                     {
                         "Name": "Complete in under 01:40",
-                        "StarType": 0
+                        "StarType": 2
                     },
                     {
                         "Name": "Complete in under 01:10",
-                        "StarType": 0
+                        "StarType": 2
                     },
                     {
                         "Name": "No Deaths",
-                        "StarType": 0
+                        "StarType": 3
                     },
                     {
                         "Name": "Grab the golden pin",
-                        "StarType": 0
+                        "StarType": 5
                     },
                     {
                         "Name": "Find the hidden G.A.T. comic",
-                        "StarType": 0
+                        "StarType": 6
                     },
                     {
                         "Name": "Buddy Mode",
-                        "StarType": 3
+                        "StarType": 8
                     }
                 ]
             },
@@ -448,27 +448,27 @@
                     },
                     {
                         "Name": "Complete in under 01:15",
-                        "StarType": 0
+                        "StarType": 2
                     },
                     {
                         "Name": "Complete in under 00:58",
-                        "StarType": 0
+                        "StarType": 2
                     },
                     {
                         "Name": "Tag your sister",
-                        "StarType": 0
+                        "StarType": 4
                     },
                     {
                         "Name": "Grab the golden pin",
-                        "StarType": 0
+                        "StarType": 5
                     },
                     {
                         "Name": "Find the hidden G.A.T. comic",
-                        "StarType": 0
+                        "StarType": 6
                     },
                     {
                         "Name": "Buddy Mode",
-                        "StarType": 3
+                        "StarType": 8
                     }
                 ]
             },
@@ -478,7 +478,7 @@
                 "Stars": [
                     {
                         "Name": "Find all the checkpoints using the Pogo Stick",
-                        "StarType": 2
+                        "StarType": 7
                     }
                 ]
             },
@@ -488,7 +488,7 @@
                 "Stars": [
                     {
                         "Name": "Find all the checkpoints using the Pogo Stick",
-                        "StarType": 2
+                        "StarType": 7
                     }
                 ]
             },
@@ -498,7 +498,7 @@
                 "Stars": [
                     {
                         "Name": "Get to the finish line",
-                        "StarType": 2
+                        "StarType": 7
                     }
                 ]
             },
@@ -508,7 +508,7 @@
                 "Stars": [
                     {
                         "Name": "Get to the finish line",
-                        "StarType": 2
+                        "StarType": 7
                     }
                 ]
             },
@@ -518,7 +518,7 @@
                 "Stars": [
                     {
                         "Name": "Find all the checkpoints using the Jetpack",
-                        "StarType": 2
+                        "StarType": 7
                     }
                 ]
             },
@@ -528,7 +528,7 @@
                 "Stars": [
                     {
                         "Name": "Complete the course",
-                        "StarType": 2
+                        "StarType": 7
                     }
                 ]
             },
@@ -538,11 +538,338 @@
                 "Stars": [
                     {
                         "Name": "Complete the course",
-                        "StarType": 2
+                        "StarType": 7
                     }
                 ]
             }
         ],
-        "ForceFields": []
+        "ForceFields": [
+            {
+                "Name": "Spawn/Basketball Courts"
+            },
+            {
+                "Name": "Basketball Courts/Sports Day Side"
+            }
+        ]
+    },
+    {
+        "Name": "School",
+        "Courses": [
+            {
+                "Name": "ABCs and 123s",
+                "CourseType": 0,
+                "Stars": [
+                    {
+                        "Name": "Complete the course",
+                        "StarType": 1
+                    },
+                    {
+                        "Name": "Complete in under 12:00",
+                        "StarType": 2
+                    },
+                    {
+                        "Name": "Complete in under 05:00",
+                        "StarType": 2
+                    },
+                    {
+                        "Name": "No Deaths",
+                        "StarType": 3
+                    },
+                    {
+                        "Name": "Grab the golden pin",
+                        "StarType": 5
+                    },
+                    {
+                        "Name": "Find the hidden G.A.T. comic",
+                        "StarType": 6
+                    },
+                    {
+                        "Name": "Buddy Mode",
+                        "StarType": 8
+                    }
+                ]
+            },
+            {
+                "Name": "Middle School Mischief",
+                "CourseType": 0,
+                "Stars": [
+                    {
+                        "Name": "Complete the course",
+                        "StarType": 1
+                    },
+                    {
+                        "Name": "Complete in under 11:00",
+                        "StarType": 2
+                    },
+                    {
+                        "Name": "Complete in under 03:00",
+                        "StarType": 2
+                    },
+                    {
+                        "Name": "No Deaths",
+                        "StarType": 3
+                    },
+                    {
+                        "Name": "Grab the golden pin",
+                        "StarType": 5
+                    },
+                    {
+                        "Name": "Find the hidden G.A.T. comic",
+                        "StarType": 6
+                    },
+                    {
+                        "Name": "Buddy Mode",
+                        "StarType": 8
+                    }
+                ]
+            },
+            {
+                "Name": "Repeat the Grade",
+                "CourseType": 0,
+                "Stars": [
+                    {
+                        "Name": "Complete the course",
+                        "StarType": 1
+                    },
+                    {
+                        "Name": "Complete in under 10:00",
+                        "StarType": 2
+                    },
+                    {
+                        "Name": "Complete in under 03:30",
+                        "StarType": 2
+                    },
+                    {
+                        "Name": "No Deaths",
+                        "StarType": 3
+                    },
+                    {
+                        "Name": "Grab the golden pin",
+                        "StarType": 5
+                    },
+                    {
+                        "Name": "Find the hidden G.A.T. comic",
+                        "StarType": 6
+                    },
+                    {
+                        "Name": "Buddy Mode",
+                        "StarType": 8
+                    }
+                ]
+            },
+            {
+                "Name": "Senior Trip",
+                "CourseType": 0,
+                "Stars": [
+                    {
+                        "Name": "Complete the course",
+                        "StarType": 1
+                    },
+                    {
+                        "Name": "Complete in under 08:00",
+                        "StarType": 2
+                    },
+                    {
+                        "Name": "Complete in under 03:00",
+                        "StarType": 2
+                    },
+                    {
+                        "Name": "No Deaths",
+                        "StarType": 3
+                    },
+                    {
+                        "Name": "Grab the golden pin",
+                        "StarType": 5
+                    },
+                    {
+                        "Name": "Find the hidden G.A.T. comic",
+                        "StarType": 6
+                    },
+                    {
+                        "Name": "Buddy Mode",
+                        "StarType": 8
+                    }
+                ]
+            },
+            {
+                "Name": "Freshman Frenzy",
+                "CourseType": 0,
+                "Stars": [
+                    {
+                        "Name": "Complete the course",
+                        "StarType": 1
+                    },
+                    {
+                        "Name": "Complete in under 10:00",
+                        "StarType": 2
+                    },
+                    {
+                        "Name": "Complete in under 03:30",
+                        "StarType": 2
+                    },
+                    {
+                        "Name": "No Deaths",
+                        "StarType": 3
+                    },
+                    {
+                        "Name": "Grab the golden pin",
+                        "StarType": 5
+                    },
+                    {
+                        "Name": "Find the hidden G.A.T. comic",
+                        "StarType": 6
+                    },
+                    {
+                        "Name": "Buddy Mode",
+                        "StarType": 8
+                    }
+                ]
+            },
+            {
+                "Name": "Chase Your Sister",
+                "CourseType": 0,
+                "Stars": [
+                    {
+                        "Name": "Complete the course",
+                        "StarType": 1
+                    },
+                    {
+                        "Name": "Complete in under 02:00",
+                        "StarType": 2
+                    },
+                    {
+                        "Name": "Complete in under 00:50",
+                        "StarType": 2
+                    },
+                    {
+                        "Name": "Tag your sister",
+                        "StarType": 4
+                    },
+                    {
+                        "Name": "Grab the golden pin",
+                        "StarType": 5
+                    },
+                    {
+                        "Name": "Find the hidden G.A.T. comic",
+                        "StarType": 6
+                    },
+                    {
+                        "Name": "Buddy Mode",
+                        "StarType": 8
+                    }
+                ]
+            },
+            {
+                "Name": "Pogo Trial 1",
+                "CourseType": 1,
+                "Stars": [
+                    {
+                        "Name": "Find all the checkpoints using the Pogo Stick",
+                        "StarType": 7
+                    }
+                ]
+            },
+            {
+                "Name": "Pogo Trial 2",
+                "CourseType": 1,
+                "Stars": [
+                    {
+                        "Name": "Find all the checkpoints using the Pogo Stick",
+                        "StarType": 7
+                    }
+                ]
+            },
+            {
+                "Name": "Pogo Trial 3",
+                "CourseType": 1,
+                "Stars": [
+                    {
+                        "Name": "Find all the checkpoints using the Pogo Stick",
+                        "StarType": 7
+                    }
+                ]
+            },
+            {
+                "Name": "Tiny Toy Trial",
+                "CourseType": 2,
+                "Stars": [
+                    {
+                        "Name": "Get to the finish line",
+                        "StarType": 7
+                    }
+                ]
+            },
+            {
+                "Name": "Jetpack Trial",
+                "CourseType": 3,
+                "Stars": [
+                    {
+                        "Name": "Find all the checkpoints using the Jetpack",
+                        "StarType": 7
+                    }
+                ]
+            },
+            {
+                "Name": "Chase the Grade",
+                "CourseType": 4,
+                "Stars": [
+                    {
+                        "Name": "Complete the course",
+                        "StarType": 7
+                    }
+                ]
+            },
+            {
+                "Name": "All Course Marathon",
+                "CourseType": 5,
+                "Stars": [
+                    {
+                        "Name": "Complete the course",
+                        "StarType": 7
+                    }
+                ]
+            }
+        ],
+        "ForceFields": [
+            {
+                "Name": "Atrium/Cafeteria"
+            },
+            {
+                "Name": "Gym Hallway/Computer Lab"
+            },
+            {
+                "Name": "Social Studies Hallway/Art Hallway"
+            },
+            {
+                "Name": "Teacher's Lounge Hallway/Art Hallway"
+            },
+            {
+                "Name": "Social Studies Class Left"
+            },
+            {
+                "Name": "English Hallway/Teacher's Lounge Hallway"
+            },
+            {
+                "Name": "Science Lab/Art Closet"
+            },
+            {
+                "Name": "Art Hallway/Art Class"
+            },
+            {
+                "Name": "Gym Hallway/Science Lab"
+            },
+            {
+                "Name": "Atrium/Social Studies Hallway"
+            },
+            {
+                "Name": "Art Closet/Art Class"
+            },
+            {
+                "Name": "Social Studies Class Right"
+            },
+            {
+                "Name": "Teacher's Lounge/Courtyard"
+            }
+        ]
     }
 ]
