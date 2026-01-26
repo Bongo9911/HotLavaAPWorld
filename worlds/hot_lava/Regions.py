@@ -2,13 +2,15 @@ from typing import Callable, Optional
 
 from ..AutoWorld import World
 from .Locations import HotLavaLocation, HotLavaLocationInfo, get_locations_info_for_course
+from .CourseType import CourseType
 from .StarType import StarType
-from BaseClasses import CollectionState, Region
+from BaseClasses import CollectionState, LocationProgressType, Region
 
 def create_regions_for_all_worlds(world: World, menu_region: Region) -> None:
     create_gym_class_regions(world, menu_region)
     create_playground_regions(world, menu_region)
     create_school_regions(world, menu_region)
+    create_wholesale_regions(world, menu_region)
 
 def create_gym_class_regions(world: World, menu_region: Region) -> None:
     world_name = "Gym Class"
@@ -127,6 +129,47 @@ def create_school_regions(world: World, menu_region: Region) -> None:
     create_region_for_course(world, world_name, "Chase the Grade", art_class_region)
     create_region_for_course(world, world_name, "All Course Marathon", art_closet_region)
     
+def create_wholesale_regions(world: World, menu_region: Region) -> None:
+    world_name = "Wholesale"
+    buddy_region_base = "Shopping Area"
+    buddy_region_name = world_name + " - " + buddy_region_base
+    
+    employee_hallway_region = create_region_for_world(world, world_name, "Employee Hallway")
+    menu_region.connect(employee_hallway_region, rule=lambda collection: collection.has("World Unlock - " + world_name, world.player))
+    
+    breakroom_region = create_region_for_world(world, world_name, "Breakroom")
+    employee_hallway_region.connect(breakroom_region, rule=lambda collection: collection.has(get_forcefield_name(world_name, "Employee Hallway/Breakroom"), world.player))
+    
+    janitors_closet_region = create_region_for_world(world, world_name, "Janitor's Closet")
+    employee_hallway_region.connect(janitors_closet_region, rule=lambda collection: collection.has(get_forcefield_name(world_name, "Employee Hallway/Janitor's Closet"), world.player))
+    
+    checkout_region = create_region_for_world(world, world_name, "Checkout")
+    employee_hallway_region.connect(checkout_region, rule=lambda collection: collection.has(get_forcefield_name(world_name, "Employee Hallway/Checkout"), world.player))
+    
+    cart_storage_region = create_region_for_world(world, world_name, "Cart Storage")
+    checkout_region.connect(cart_storage_region, rule=lambda collection: collection.has(get_forcefield_name(world_name, "Checkout/Cart Storage"), world.player))
+    
+    shopping_area_region = create_region_for_world(world, world_name, buddy_region_base)
+    checkout_region.connect(shopping_area_region, rule=lambda collection: collection.has(get_forcefield_name(world_name, "Checkout/Shopping Area"), world.player))
+    
+    under_shelves_region = create_region_for_world(world, world_name, "Under the Shelves")
+    shopping_area_region.connect(under_shelves_region, rule=lambda collection: collection.has(get_forcefield_name(world_name, "Under the Shelves"), world.player))
+    
+    create_region_for_course(world, world_name, "To the Top", employee_hallway_region, buddy_region_name)
+    create_region_for_course(world, world_name, "Duct and Cover", checkout_region, buddy_region_name)
+    create_region_for_course(world, world_name, "Meat Market", shopping_area_region, buddy_region_name)
+    create_region_for_course(world, world_name, "Returns", checkout_region, buddy_region_name)
+    create_region_for_course(world, world_name, "Meat Grinder", checkout_region, buddy_region_name)
+    create_region_for_course(world, world_name, "Chase Through the Store", shopping_area_region, buddy_region_name)
+        
+    create_region_for_course(world, world_name, "Pogo Trial 1", checkout_region)
+    create_region_for_course(world, world_name, "Pogo Trial 2", cart_storage_region)
+    create_region_for_course(world, world_name, "Pogo Trial 3", janitors_closet_region)
+    create_region_for_course(world, world_name, "Tiny Toy Trial", shopping_area_region)
+    create_region_for_course(world, world_name, "Jetpack Trial", shopping_area_region)
+    create_region_for_course(world, world_name, "Chase the Grade", breakroom_region)
+    create_region_for_course(world, world_name, "All Course Marathon", under_shelves_region)
+    
     
 def create_region_for_world(world: World, world_name: str, region_name: str) -> Region:
     region = Region(world_name + " - " + region_name, world.player, world.multiworld)
@@ -154,7 +197,15 @@ def create_region_for_course(world: World, world_name: str, course_name: str, pa
 
 def build_location(world: World, region: Region, locationInfo: HotLavaLocationInfo) -> HotLavaLocation:
     location = HotLavaLocation(world.player, locationInfo.name, locationInfo.id, region)
-    location.progress_type = locationInfo.progressType
+    
+    #TODO: allow the progress type to be configurable in options
+    if (locationInfo.starType == StarType.CourseComplete or locationInfo.courseType == CourseType.Pogo or locationInfo.courseType == CourseType.TinyToy or locationInfo.courseType == CourseType.Jetpack or locationInfo.courseType == CourseType.Chase):
+        location.progress_type = LocationProgressType.PRIORITY
+    elif (locationInfo.starType == StarType.Buddy or locationInfo.courseType == CourseType.AllCourseMarathon):
+        location.progress_type = LocationProgressType.EXCLUDED
+    else:
+        location.progress_type = LocationProgressType.DEFAULT
+        
     return location
 
 def get_forcefield_name(world_name, forcefield_name):

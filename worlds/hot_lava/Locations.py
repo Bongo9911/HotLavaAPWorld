@@ -10,14 +10,14 @@ class HotLavaLocation(Location):
 class HotLavaLocationInfo():
     id: int
     name: str
+    courseType: CourseType
     starType: StarType
-    progressType: LocationProgressType
     
-    def __init__(self, id, name, starType, progressType = LocationProgressType.DEFAULT):
+    def __init__(self, id, name, courseType, starType):
         self.id = id
         self.name = name
+        self.courseType = courseType
         self.starType = starType
-        self.progressType = progressType
 
 courses_by_world: dict[str, dict[str, list[HotLavaLocationInfo]]] = None
 
@@ -37,14 +37,8 @@ def build_locations_from_json():
             course_table[course["Name"]] = location_list
             
             for index, star in enumerate(course["Stars"]):
-                progressType: LocationProgressType = LocationProgressType.DEFAULT
-                if (course["CourseType"] == CourseType.Standard and index == 0):
-                    progressType = LocationProgressType.PRIORITY
-                elif (star["StarType"] == StarType.Buddy or course["CourseType"] == CourseType.AllCourseMarathon):
-                    progressType = LocationProgressType.EXCLUDED
-                
                 name: str = world["Name"] + " - " + course["Name"] + " - " + star["Name"]
-                location: HotLavaLocationInfo = HotLavaLocationInfo(worldIdOffset + courseIdOffset + index, name, star["StarType"], progressType)
+                location: HotLavaLocationInfo = HotLavaLocationInfo(worldIdOffset + courseIdOffset + index, name, course["CourseType"], star["StarType"])
                 location_list.append(location)
 
             if (course["CourseType"] == CourseType.Standard):

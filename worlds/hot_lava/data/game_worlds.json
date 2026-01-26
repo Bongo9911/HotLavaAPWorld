@@ -871,5 +871,304 @@
                 "Name": "Teacher's Lounge/Courtyard"
             }
         ]
+    },
+    {
+        "Name": "Wholesale",
+        "Courses": [
+            {
+                "Name": "To the Top",
+                "CourseType": 0,
+                "Stars": [
+                    {
+                        "Name": "Complete the course",
+                        "StarType": 1
+                    },
+                    {
+                        "Name": "Complete in under 10:00",
+                        "StarType": 2
+                    },
+                    {
+                        "Name": "Complete in under 03:00",
+                        "StarType": 2
+                    },
+                    {
+                        "Name": "No Deaths",
+                        "StarType": 3
+                    },
+                    {
+                        "Name": "Grab the golden pin",
+                        "StarType": 5
+                    },
+                    {
+                        "Name": "Find the hidden G.A.T. comic",
+                        "StarType": 6
+                    },
+                    {
+                        "Name": "Buddy Mode",
+                        "StarType": 8
+                    }
+                ]
+            },
+            {
+                "Name": "Duct and Cover",
+                "CourseType": 0,
+                "Stars": [
+                    {
+                        "Name": "Complete the course",
+                        "StarType": 1
+                    },
+                    {
+                        "Name": "Complete in under 08:00",
+                        "StarType": 2
+                    },
+                    {
+                        "Name": "Complete in under 02:30",
+                        "StarType": 2
+                    },
+                    {
+                        "Name": "No Deaths",
+                        "StarType": 3
+                    },
+                    {
+                        "Name": "Grab the golden pin",
+                        "StarType": 5
+                    },
+                    {
+                        "Name": "Find the hidden G.A.T. comic",
+                        "StarType": 6
+                    },
+                    {
+                        "Name": "Buddy Mode",
+                        "StarType": 8
+                    }
+                ]
+            },
+            {
+                "Name": "Meat Market",
+                "CourseType": 0,
+                "Stars": [
+                    {
+                        "Name": "Complete the course",
+                        "StarType": 1
+                    },
+                    {
+                        "Name": "Complete in under 08:00",
+                        "StarType": 2
+                    },
+                    {
+                        "Name": "Complete in under 03:30",
+                        "StarType": 2
+                    },
+                    {
+                        "Name": "No Deaths",
+                        "StarType": 3
+                    },
+                    {
+                        "Name": "Grab the golden pin",
+                        "StarType": 5
+                    },
+                    {
+                        "Name": "Find the hidden G.A.T. comic",
+                        "StarType": 6
+                    },
+                    {
+                        "Name": "Buddy Mode",
+                        "StarType": 8
+                    }
+                ]
+            },
+            {
+                "Name": "Returns",
+                "CourseType": 0,
+                "Stars": [
+                    {
+                        "Name": "Complete the course",
+                        "StarType": 1
+                    },
+                    {
+                        "Name": "Complete in under 04:00",
+                        "StarType": 2
+                    },
+                    {
+                        "Name": "Complete in under 02:30",
+                        "StarType": 2
+                    },
+                    {
+                        "Name": "No Deaths",
+                        "StarType": 3
+                    },
+                    {
+                        "Name": "Grab the golden pin",
+                        "StarType": 5
+                    },
+                    {
+                        "Name": "Find the hidden G.A.T. comic",
+                        "StarType": 6
+                    },
+                    {
+                        "Name": "Buddy Mode",
+                        "StarType": 8
+                    }
+                ]
+            },
+            {
+                "Name": "Meat Grinder",
+                "CourseType": 0,
+                "Stars": [
+                    {
+                        "Name": "Complete the course",
+                        "StarType": 1
+                    },
+                    {
+                        "Name": "Complete in under 10:00",
+                        "StarType": 2
+                    },
+                    {
+                        "Name": "Complete in under 04:30",
+                        "StarType": 2
+                    },
+                    {
+                        "Name": "No Deaths",
+                        "StarType": 3
+                    },
+                    {
+                        "Name": "Grab the golden pin",
+                        "StarType": 5
+                    },
+                    {
+                        "Name": "Find the hidden G.A.T. comic",
+                        "StarType": 6
+                    },
+                    {
+                        "Name": "Buddy Mode",
+                        "StarType": 8
+                    }
+                ]
+            },
+            {
+                "Name": "Chase Through the Store",
+                "CourseType": 0,
+                "Stars": [
+                    {
+                        "Name": "Complete the course",
+                        "StarType": 1
+                    },
+                    {
+                        "Name": "Complete in under 00:50",
+                        "StarType": 2
+                    },
+                    {
+                        "Name": "Complete in under 00:33",
+                        "StarType": 2
+                    },
+                    {
+                        "Name": "No Deaths",
+                        "StarType": 3
+                    },
+                    {
+                        "Name": "Grab the golden pin",
+                        "StarType": 5
+                    },
+                    {
+                        "Name": "Find the hidden G.A.T. comic",
+                        "StarType": 6
+                    },
+                    {
+                        "Name": "Buddy Mode",
+                        "StarType": 8
+                    }
+                ]
+            },
+            {
+                "Name": "Pogo Trial 1",
+                "CourseType": 1,
+                "Stars": [
+                    {
+                        "Name": "Find all the checkpoints using the Pogo Stick",
+                        "StarType": 7
+                    }
+                ]
+            },
+            {
+                "Name": "Pogo Trial 2",
+                "CourseType": 1,
+                "Stars": [
+                    {
+                        "Name": "Find all the checkpoints using the Pogo Stick",
+                        "StarType": 7
+                    }
+                ]
+            },
+            {
+                "Name": "Pogo Trial 3",
+                "CourseType": 1,
+                "Stars": [
+                    {
+                        "Name": "Find all the checkpoints using the Pogo Stick",
+                        "StarType": 7
+                    }
+                ]
+            },
+            {
+                "Name": "Tiny Toy Trial",
+                "CourseType": 2,
+                "Stars": [
+                    {
+                        "Name": "Get to the finish line",
+                        "StarType": 7
+                    }
+                ]
+            },
+            {
+                "Name": "Jetpack Trial",
+                "CourseType": 3,
+                "Stars": [
+                    {
+                        "Name": "Find all the checkpoints using the Jetpack",
+                        "StarType": 7
+                    }
+                ]
+            },
+            {
+                "Name": "Chase the Grade",
+                "CourseType": 4,
+                "Stars": [
+                    {
+                        "Name": "Complete the course",
+                        "StarType": 7
+                    }
+                ]
+            },
+            {
+                "Name": "All Course Marathon",
+                "CourseType": 5,
+                "Stars": [
+                    {
+                        "Name": "Complete the course",
+                        "StarType": 7
+                    }
+                ]
+            }
+        ],
+        "ForceFields": [
+            {
+                "Name": "Employee Hallway/Checkout"
+            },
+            {
+                "Name": "Employee Hallway/Janitor's Closet"
+            },
+            {
+                "Name": "Under the Shelves"
+            },
+            {
+                "Name": "Checkout/Cart Storage"
+            },
+            {
+                "Name": "Employee Hallway/Breakroom"
+            },
+            {
+                "Name": "Checkout/Shopping Area"
+            }
+        ]
     }
 ]
