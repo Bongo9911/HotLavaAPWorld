@@ -832,9 +832,6 @@
         ],
         "ForceFields": [
             {
-                "Name": "Atrium/Cafeteria"
-            },
-            {
                 "Name": "Gym Hallway/Computer Lab"
             },
             {
@@ -842,9 +839,6 @@
             },
             {
                 "Name": "Teacher's Lounge Hallway/Art Hallway"
-            },
-            {
-                "Name": "Social Studies Class Left"
             },
             {
                 "Name": "English Hallway/Teacher's Lounge Hallway"
@@ -856,16 +850,7 @@
                 "Name": "Art Hallway/Art Class"
             },
             {
-                "Name": "Gym Hallway/Science Lab"
-            },
-            {
-                "Name": "Atrium/Social Studies Hallway"
-            },
-            {
                 "Name": "Art Closet/Art Class"
-            },
-            {
-                "Name": "Social Studies Class Right"
             },
             {
                 "Name": "Teacher's Lounge/Courtyard"

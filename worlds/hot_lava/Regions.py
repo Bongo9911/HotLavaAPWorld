@@ -97,12 +97,10 @@ def create_school_regions(world: World, menu_region: Region) -> None:
     
     cafeteria_social_studies_region = create_region_for_world(world, world_name, buddy_region_base)
     art_hallway_gym_region.connect(cafeteria_social_studies_region, rule=lambda collection: collection.has(get_forcefield_name(world_name, "Social Studies Hallway/Art Hallway"), world.player))
-    atrium_region.connect(cafeteria_social_studies_region, rule=lambda collection: collection.has(get_forcefield_name(world_name, "Atrium/Cafeteria"), world.player) or 
-                          collection.has(get_forcefield_name(world_name, "Atrium/Social Studies Hallway"), world.player))
+    atrium_region.connect(cafeteria_social_studies_region)
     
     social_studies_region = create_region_for_world(world, world_name, "Social Studies Class")
-    cafeteria_social_studies_region.connect(social_studies_region, rule=lambda collection: collection.has(get_forcefield_name(world_name, "Social Studies Class Left"), world.player) or 
-                        collection.has(get_forcefield_name(world_name, "Social Studies Class Right"), world.player))
+    cafeteria_social_studies_region.connect(social_studies_region)
     
     art_class_region = create_region_for_world(world, world_name, "Art Class")
     art_hallway_gym_region.connect(art_class_region, rule=lambda collection: collection.has(get_forcefield_name(world_name, "Art Hallway/Art Class"), world.player))
@@ -111,7 +109,7 @@ def create_school_regions(world: World, menu_region: Region) -> None:
     art_class_region.connect(art_closet_region, rule=lambda collection: collection.has(get_forcefield_name(world_name, "Art Closet/Art Class"), world.player))
     
     science_lab_region = create_region_for_world(world, world_name, "Science Lab")
-    art_hallway_gym_region.connect(science_lab_region, rule=lambda collection: collection.has(get_forcefield_name(world_name, "Gym Hallway/Science Lab"), world.player))
+    art_hallway_gym_region.connect(science_lab_region)
     art_closet_region.connect(science_lab_region, rule=lambda collection: collection.has(get_forcefield_name(world_name, "Science Lab/Art Closet"), world.player))
         
     computer_lab_region = create_region_for_world(world, world_name, "Computer Lab")
