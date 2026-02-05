@@ -2,7 +2,7 @@ import settings
 
 from worlds.hot_lava.Regions import create_regions_for_all_worlds
 from .Items import HotLavaItem, get_all_items_table, get_items_by_world
-from .Locations import get_location_name_to_id_for_all, get_locations_info_for_world
+from .Locations import get_all_location_infos, get_location_name_to_id_for_all, get_locations_info_for_world
 from .Options import HotLavaOptions
 from .StarType import StarType
 from BaseClasses import CollectionState, Tutorial, ItemClassification, Region
@@ -95,7 +95,9 @@ class HotLavaWorld(World):
 
     def set_rules(self) -> None:
         #TODO        
-        victory_locations = [loc.name for loc in get_locations_info_for_world("Master Class") 
+        # victory_locations = [loc.name for loc in get_locations_info_for_world("Master Class") 
+        #     if loc.starType == StarType.CourseComplete]
+        victory_locations = [loc.name for loc in get_all_location_infos() 
             if loc.starType == StarType.CourseComplete]
         
         self.multiworld.completion_condition[self.player] = lambda state: all(

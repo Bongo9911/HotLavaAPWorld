@@ -85,3 +85,11 @@ def get_locations_info_for_world(world_name) -> list[HotLavaLocationInfo]:
     for d in courses:
         loc_list.extend(courses[d])
     return loc_list
+
+def get_all_location_infos() -> list[HotLavaLocationInfo]:
+    worlds = get_courses_by_world()
+    loc_list: list[HotLavaLocationInfo] = []
+    for world in worlds:
+        for course in worlds[world]:
+            loc_list.extend(worlds[world][course])
+    return loc_list
