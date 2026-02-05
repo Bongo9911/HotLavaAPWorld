@@ -2,9 +2,10 @@ import settings
 
 from worlds.hot_lava.Regions import create_regions_for_all_worlds
 from .Items import HotLavaItem, get_all_items_table, get_items_by_world
-from .Locations import get_location_name_to_id_for_all
+from .Locations import get_location_name_to_id_for_all, get_locations_info_for_world
 from .Options import HotLavaOptions
-from BaseClasses import Tutorial, ItemClassification, Region
+from .StarType import StarType
+from BaseClasses import CollectionState, Tutorial, ItemClassification, Region
 from ..AutoWorld import World, WebWorld
 
 class HotLavaWeb(WebWorld):
@@ -93,5 +94,10 @@ class HotLavaWorld(World):
         return total_locations
 
     def set_rules(self) -> None:
-        #TODO
-        self.multiworld.completion_condition[self.player] = lambda state: any(location.name == "Gym Class - Gym Jam - Complete the course" for location in state.locations_checked)
+        #TODO        
+        victory_locations = [loc.name for loc in get_locations_info_for_world("Master Class") 
+            if loc.starType == StarType.CourseComplete]
+        
+        self.multiworld.completion_condition[self.player] = lambda state: all(
+            state.can_reach(self.multiworld.get_location(loc, self.player), "Location", self.player) 
+            for loc in victory_locations)

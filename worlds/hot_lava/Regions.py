@@ -11,6 +11,9 @@ def create_regions_for_all_worlds(world: World, menu_region: Region) -> None:
     create_playground_regions(world, menu_region)
     create_school_regions(world, menu_region)
     create_wholesale_regions(world, menu_region)
+    create_master_class_regions(world, menu_region)
+    create_basement_regions(world, menu_region)
+    create_roccos_arcade_regions(world, menu_region)
 
 def create_gym_class_regions(world: World, menu_region: Region) -> None:
     world_name = "Gym Class"
@@ -170,6 +173,78 @@ def create_wholesale_regions(world: World, menu_region: Region) -> None:
     create_region_for_course(world, world_name, "Chase the Grade", breakroom_region)
     create_region_for_course(world, world_name, "All Course Marathon", under_shelves_region)
     
+def create_master_class_regions(world: World, menu_region: Region) -> None:
+    world_name = "Master Class"
+    
+    gym_region = create_region_for_world(world, world_name, "Gym")
+    menu_region.connect(gym_region, rule=lambda collection: collection.has("World Unlock - " + world_name, world.player))
+    
+    create_region_for_course(world, world_name, "Air Control Mastery", gym_region)
+    create_region_for_course(world, world_name, "Wall Jump Mastery", gym_region)
+    create_region_for_course(world, world_name, "Surf Mastery", gym_region)
+    create_region_for_course(world, world_name, "Boosting Mastery", gym_region)
+    create_region_for_course(world, world_name, "Wind Tunnel Mastery", gym_region)
+    create_region_for_course(world, world_name, "Honors Gym Class", gym_region)
+        
+    create_region_for_course(world, world_name, "Pogo Trial", gym_region)
+    create_region_for_course(world, world_name, "Tiny Toy Trial", gym_region)
+    create_region_for_course(world, world_name, "Jetpack Trial", gym_region)
+    create_region_for_course(world, world_name, "All Course Marathon", gym_region)
+    
+def create_basement_regions(world: World, menu_region: Region) -> None:
+    world_name = "Basement"
+    buddy_region_base = "Den"
+    buddy_region_name = world_name + " - " + buddy_region_base
+    
+    foyer_region = create_region_for_world(world, world_name, "Foyer")
+    menu_region.connect(foyer_region, rule=lambda collection: collection.has("World Unlock - " + world_name, world.player)) 
+    
+    living_room_region = create_region_for_world(world, world_name, "Living Room")
+    foyer_region.connect(living_room_region, rule=lambda collection: collection.has(get_forcefield_name(world_name, "Foyer/Living Room"), world.player))
+    
+    dining_room_region = create_region_for_world(world, world_name, "Dining Room")
+    foyer_region.connect(dining_room_region, rule=lambda collection: collection.has(get_forcefield_name(world_name, "Foyer/Dining Room"), world.player))
+    
+    basement_region = create_region_for_world(world, world_name, "Basement Storage")
+    dining_room_region.connect(basement_region, rule=lambda collection: collection.has(get_forcefield_name(world_name, "Kitchen/Basement Storage"), world.player))
+    
+    den_region = create_region_for_world(world, world_name, buddy_region_base)
+    basement_region.connect(den_region, rule=lambda collection: collection.has(get_forcefield_name(world_name, "Basement Storage/Den"), world.player))
+    
+    create_region_for_course(world, world_name, "Race to the Summit", foyer_region, buddy_region_name)
+    create_region_for_course(world, world_name, "Lights Out", foyer_region, buddy_region_name)
+    create_region_for_course(world, world_name, "Temple Sprint", living_room_region, buddy_region_name)
+    create_region_for_course(world, world_name, "Fancy Footwork", foyer_region, buddy_region_name)
+    create_region_for_course(world, world_name, "Minecart Carnage", basement_region, buddy_region_name)
+    create_region_for_course(world, world_name, "Chase The Meaning", basement_region, buddy_region_name)
+    
+    create_region_for_course(world, world_name, "Pogo Trial", dining_room_region)
+    create_region_for_course(world, world_name, "Tiny Toy Trial", basement_region)
+    create_region_for_course(world, world_name, "Jetpack Trial", foyer_region)
+    create_region_for_course(world, world_name, "All Course Marathon", den_region)
+    
+def create_roccos_arcade_regions(world: World, menu_region: Region) -> None:
+    world_name = "Rocco's Arcade"
+    buddy_region_base = "Arcade"
+    buddy_region_name = world_name + " - " + buddy_region_base
+    
+    arcade_region = create_region_for_world(world, world_name, buddy_region_base)
+    menu_region.connect(arcade_region, rule=lambda collection: collection.has("World Unlock - " + world_name, world.player))
+    
+    create_region_for_course(world, world_name, "Arcade Action", arcade_region, buddy_region_name)
+    create_region_for_course(world, world_name, "Rocco's Rumpus Room", arcade_region, buddy_region_name)
+    create_region_for_course(world, world_name, "Employees Only", arcade_region, buddy_region_name)
+    create_region_for_course(world, world_name, "Storage Room Spree", arcade_region, buddy_region_name)
+    create_region_for_course(world, world_name, "Birthday Blowout", arcade_region, buddy_region_name)
+    create_region_for_course(world, world_name, "Chase to the Arcade", arcade_region, buddy_region_name)
+    
+    create_region_for_course(world, world_name, "Pogo Trial 1", arcade_region)
+    create_region_for_course(world, world_name, "Pogo Trial 2", arcade_region)
+    create_region_for_course(world, world_name, "Tiny Toy Trial 1", arcade_region)
+    create_region_for_course(world, world_name, "Tiny Toy Trial 2", arcade_region)
+    create_region_for_course(world, world_name, "Jetpack Trial", arcade_region)
+    create_region_for_course(world, world_name, "All Course Marathon", arcade_region)
+    
     
 def create_region_for_world(world: World, world_name: str, region_name: str) -> Region:
     region = Region(world_name + " - " + region_name, world.player, world.multiworld)
@@ -207,6 +282,27 @@ def build_location(world: World, region: Region, locationInfo: HotLavaLocationIn
         location.progress_type = LocationProgressType.DEFAULT
         
     return location
+
+def get_location_progress_type(locationInfo: HotLavaLocationInfo):
+    match locationInfo.courseType:
+        case CourseType.Pogo:
+            return LocationProgressType.DEFAULT
+        case CourseType.TinyToy:
+            return LocationProgressType.DEFAULT
+        case CourseType.Jetpack:
+            return LocationProgressType.DEFAULT
+        case CourseType.Chase:
+            return LocationProgressType.PRIORITY
+        case CourseType.AllCourseMarathon:
+            return LocationProgressType.EXCLUDED
+        case _:
+            match locationInfo.starType:
+                case StarType.CourseComplete:
+                    return LocationProgressType.PRIORITY
+                case StarType.Buddy:
+                    return LocationProgressType.EXCLUDED
+                case _:
+                    return LocationProgressType.DEFAULT
 
 def get_forcefield_name(world_name, forcefield_name):
     return world_name + " - Force Field Deactivate - " + forcefield_name

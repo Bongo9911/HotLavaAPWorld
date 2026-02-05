@@ -78,3 +78,10 @@ def get_location_name_to_id_for_course(world_name, course_name):
 
 def get_locations_info_for_course(world_name, course_name) -> list[HotLavaLocationInfo]:
     return get_courses_by_world()[world_name][course_name]
+
+def get_locations_info_for_world(world_name) -> list[HotLavaLocationInfo]:
+    courses = get_courses_by_world()[world_name]
+    loc_list: list[HotLavaLocationInfo] = []
+    for d in courses:
+        loc_list.extend(courses[d])
+    return loc_list
