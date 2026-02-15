@@ -12,6 +12,7 @@ class HotLavaItemData(NamedTuple):
 
 filler_items: dict[str, HotLavaItemData] = {
     "XP Shard": HotLavaItemData(1, ItemClassification.filler),
+    "Star": HotLavaItemData(2, ItemClassification.progression_skip_balancing),
 }
 
 items_by_world: dict[str, dict[str, HotLavaItemData]] = None
@@ -27,8 +28,8 @@ def build_locations_from_json():
         world_table: dict[str, HotLavaItemData] = {}
         items_by_world[world["Name"]] = world_table
         
-        world_unlock_name = "World Unlock - " + world["Name"]
-        world_table[world_unlock_name] = HotLavaItemData(worldIdOffset, ItemClassification.progression)
+        # world_unlock_name = "World Unlock - " + world["Name"]
+        # world_table[world_unlock_name] = HotLavaItemData(worldIdOffset, ItemClassification.progression)
         
         itemIdOffset = 1
         for index, forceField in enumerate(world["ForceFields"]):

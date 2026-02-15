@@ -10,3 +10,4 @@ class StarType(IntEnum):
     Comic = 6
     TrialComplete = 7
     Buddy = 8
+    BuddyChase = 9
