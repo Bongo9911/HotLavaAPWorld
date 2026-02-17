@@ -4,14 +4,14 @@ from typing import Any
 import settings
 
 from worlds.generic.Rules import set_rule
-from worlds.hot_lava.Regions import create_regions_for_all_worlds
-from .Items import HotLavaItem, get_all_items_table, get_items_by_world
+from .Regions import create_regions_for_all_worlds
+from .Items import HotLavaItem, create_all_items, get_all_items_table
 from .Locations import get_all_location_infos, get_location_name_to_id_for_all, get_locations_info_for_world
 from .Options import HotLavaOptions
 from .StarType import StarType
 from BaseClasses import CollectionState, Tutorial, ItemClassification, Region
 from ..AutoWorld import World
-from .Rules import set_rules
+from .Rules import set_all_rules
 
 class HotLavaWorld(World):
     """Hot Lava is 3D parkour-platformer game developed by Klei Entertainment inspired by the classic kids' game 'The Floor is Lava'"""
@@ -49,6 +49,10 @@ class HotLavaWorld(World):
 
         return item
     
+    def get_filler_item_name(self):
+        # TODO: Should this randomly return star or XP Shard?
+        return "XP Shard"
+    
     def create_event(self, event: str) -> HotLavaItem:
         # while we are at it, we can also add a helper to create events
         return HotLavaItem(event, ItemClassification.progression, None, self.player)
@@ -60,28 +64,7 @@ class HotLavaWorld(World):
         # Having an item in the start inventory won't remove it from the pool.
         # If you want to do that, use start_inventory_from_pool
         
-        # TODO: random starting world?
-        # self.multiworld.push_precollected(self.create_item("World Unlock - Gym Class"))
-
-        # TODO: need a way to turn on and off force field itmes by options
-        # items_by_world = get_items_by_world()
-        # for world in items_by_world:
-        #     for item_name in items_by_world[world]:
-        #         # Don't add any pre-collected items to the pool
-        #         if (not any(item.name == item_name for item in self.multiworld.precollected_items[self.player])):
-        #             item = self.create_item(item_name)
-        #             self.multiworld.itempool.append(item)
-
-        # itempool and number of locations should match up.
-        # If this is not the case we want to fill the itempool with junk.
-        junk = self.get_total_locations() - len(self.multiworld.itempool)  # calculate this based on player options
-        
-        star_junk = math.ceil(junk * .75)
-        xp_junk = junk - star_junk
-        
-        # self.multiworld.itempool += [self.create_item("XP Shard") for _ in range(junk)]
-        self.multiworld.itempool += [self.create_item("Star") for _ in range(star_junk)]
-        self.multiworld.itempool += [self.create_item("XP Shard") for _ in range(xp_junk)]
+        create_all_items(self)
         
     def get_total_locations(self) -> int:
         total_locations = 0
@@ -90,11 +73,15 @@ class HotLavaWorld(World):
         return total_locations
 
     def set_rules(self) -> None:
-        set_rules(self.multiworld, self.options, self.player)
+        set_all_rules(self)
         
     def fill_slot_data(self) -> dict[str, Any]: 
-        slot_data: dict[str, Any] = {}
+        return self.options.as_dict(
+            "world_unlock_logic", "force_field_logic", "enabled_worlds", "start_world", "last_world", "death_link"
+        )
         
-        # slot_data["stars_per_world"] = self.stars_per_world
+        # slot_data: dict[str, Any] = {}
         
-        return slot_data
+        # # slot_data["stars_per_world"] = self.stars_per_world
+        
+        # return slot_data

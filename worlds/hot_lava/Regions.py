@@ -1,6 +1,8 @@
+from __future__ import annotations
+
 from typing import Callable, Optional, TYPE_CHECKING
 
-from ..AutoWorld import World
+from .Data import GameCourseInfo, GameStarInfo, game_world_dict
 from .Locations import HotLavaLocation, HotLavaLocationInfo, get_locations_info_for_course
 from .CourseType import CourseType
 from .StarType import StarType
@@ -18,7 +20,7 @@ def create_regions_for_all_worlds(world: HotLavaWorld, menu_region: Region) -> N
     create_basement_regions(world, menu_region)
     create_roccos_arcade_regions(world, menu_region)
 
-def create_gym_class_regions(world: World, menu_region: Region) -> None:
+def create_gym_class_regions(world: HotLavaWorld, menu_region: Region) -> None:
     world_name = "Gym Class"
     buddy_region_base = "Side Entrance"
     buddy_region_name = world_name + " - " + buddy_region_base
@@ -55,7 +57,7 @@ def create_gym_class_regions(world: World, menu_region: Region) -> None:
     create_region_for_course(world, world_name, "All Course Marathon", side_entrance_region)
     
     
-def create_playground_regions(world: World, menu_region: Region) -> None:
+def create_playground_regions(world: HotLavaWorld, menu_region: Region) -> None:
     world_name = "Playground"
     buddy_region_base = "Sports Day Side"
     buddy_region_name = world_name + " - " + buddy_region_base
@@ -296,8 +298,9 @@ def create_region_for_course(world: HotLavaWorld, world_name: str, course_name: 
                                 rule: Optional[Callable[[CollectionState], bool]] = None) -> Region:
     region = Region(world_name + " - " + course_name, world.player, world.multiworld)
     locationsInfo = get_locations_info_for_course(world_name, course_name)
+    
     for locationInfo in locationsInfo:
-        if(locationInfo.starType == StarType.Buddy and buddy_region_name != None):
+        if(locationInfo.star_type == StarType.Buddy and buddy_region_name != None):
             buddy_region = Region(world_name + " - " + course_name + " - Buddy", world.player, world.multiworld)
             buddy_region.locations.append(build_location(world, buddy_region, locationInfo))
             world.multiworld.regions.append(buddy_region)
@@ -319,7 +322,7 @@ def build_location(world: HotLavaWorld, region: Region, locationInfo: HotLavaLoc
     return location
 
 def get_location_progress_type(locationInfo: HotLavaLocationInfo):
-    match locationInfo.courseType:
+    match locationInfo.course_type:
         case CourseType.Pogo:
             return LocationProgressType.DEFAULT
         case CourseType.TinyToy:
@@ -331,16 +334,13 @@ def get_location_progress_type(locationInfo: HotLavaLocationInfo):
         case CourseType.AllCourseMarathon:
             return LocationProgressType.EXCLUDED
         case _:
-            match locationInfo.starType:
+            match locationInfo.star_type:
                 case StarType.CourseComplete | StarType.BuddyChase:
                     return LocationProgressType.PRIORITY
                 case StarType.Buddy:
                     return LocationProgressType.EXCLUDED
                 case _:
                     return LocationProgressType.DEFAULT
-
-def get_forcefield_name(world_name, forcefield_name):
-    return world_name + " - Force Field Deactivate - " + forcefield_name
 
 def connect_regions(world: HotLavaWorld, source: str, target: str, rule: Optional[Callable[[CollectionState], bool]] = None) -> Entrance:
     sourceRegion = world.get_region(source)

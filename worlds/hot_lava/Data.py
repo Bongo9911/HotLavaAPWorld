@@ -1,16 +1,7 @@
 from dataclasses import dataclass, field
-import pkgutil
-from typing import Any, Dict, List, Union
-import orjson
 
 from .StarType import StarType
 from .CourseType import CourseType
-
-def load_json_data(data_name: str) -> Union[List[Any], Dict[str, Any]]:
-    return orjson.loads(pkgutil.get_data(__name__, "data/" + data_name).decode("utf-8-sig"))
-
-def load_world_data():
-    return load_json_data("game_worlds.json")
 
 @dataclass
 class GameStarInfo():
@@ -31,18 +22,24 @@ class GameWorldConnection():
     force_fields: list[str] = field(default_factory=list)
     # The list of courses needed to deactivate the force field in vanilla logic
     courses: list[str] = field(default_factory=list)
+        
+@dataclass
+class GameForceFieldInfo():
+    item_id: int
+    name: str
 
 @dataclass
 class GameWorldInfo():
+    item_id: int
+    camel_case_name: str
     name: str
     courses: list[GameCourseInfo] = field(default_factory=list)
     connections: list[GameWorldConnection] = field(default_factory=list)
-    
-
+    force_fields: list[GameForceFieldInfo] = field(default_factory=list)
     
 # Gym Class
 gym_class = GameWorldInfo(
-    "Gym Class",
+    100, "gym_class", "Gym Class",
     courses = [
         GameCourseInfo("Gym Jam", CourseType.Standard, [
             GameStarInfo(100, "Complete the course", StarType.CourseComplete),
@@ -117,12 +114,19 @@ gym_class = GameWorldInfo(
         GameWorldConnection("Office Hallway", "Back Hallway", ["Office Hallway/Back Hallway"], ["Surfing Surfaces"]),
         GameWorldConnection("Spawn", "Back Hallway", ["Computer Lab Hallway/Back Hallway"], ["Surfing Surfaces"]),
         GameWorldConnection("Back Hallway", "Side Entrance", ["Back Hallway/Side Entrance"], ["Chase Your Sister"]),
+    ],
+    force_fields= [
+        GameForceFieldInfo(110, "Gym/Office Hallway"),
+        GameForceFieldInfo(111, "Office Hallway/Janitor's Closet"),
+        GameForceFieldInfo(112, "Office Hallway/Back Hallway"),
+        GameForceFieldInfo(113, "Computer Lab Hallway/Back Hallway"),
+        GameForceFieldInfo(114, "Back Hallway/Side Entrance"),
     ]
 )
 
 # Playground
 playground = GameWorldInfo(
-    "Playground",
+    200, "playground", "Playground",
     [
         GameCourseInfo("Recess", CourseType.Standard, [
             GameStarInfo(200, "Complete the course", StarType.CourseComplete),
@@ -203,12 +207,16 @@ playground = GameWorldInfo(
     connections= [
         GameWorldConnection("Spawn", "Basketball Courts", ["Spawn/Basketball Courts"], ["Recess"]),
         GameWorldConnection("Basketball Courts", "Sports Day Side", ["Basketball Courts/Sports Day Side"], ["Big Kids Side"]),
+    ],
+    force_fields= [
+        GameForceFieldInfo(210, "Spawn/Basketball Courts"),
+        GameForceFieldInfo(211, "Basketball Courts/Sports Day Side"),
     ]
 )
 
 # School
 school = GameWorldInfo(
-    "School",
+    300, "school", "School",
     [
         GameCourseInfo("ABCs and 123s", CourseType.Standard, [
             GameStarInfo(300, "Complete the course", StarType.CourseComplete),
@@ -302,12 +310,22 @@ school = GameWorldInfo(
         GameWorldConnection("Gym Hallway", "Science Lab", [], ["ABCs and 123s", "Middle School Mischief", "Repeat the Grade", "Senior Trip", "Freshman Frenzy"]), #TODO: add back force field names
         GameWorldConnection("Science Lab", "Art Closet", ["Science Lab/Art Closet"], ["ABCs and 123s", "Middle School Mischief", "Repeat the Grade", "Senior Trip", "Freshman Frenzy"]),
         GameWorldConnection("Gym Hallway", "Computer Lab", ["Gym Hallway/Computer Lab"], ["ABCs and 123s", "Middle School Mischief", "Repeat the Grade", "Senior Trip"]),
+    ],
+    force_fields= [
+        GameForceFieldInfo(310, "Gym Hallway/Computer Lab"),
+        GameForceFieldInfo(311, "Social Studies Hallway/Art Hallway"),
+        GameForceFieldInfo(312, "Teacher's Lounge Hallway/Art Hallway"),
+        GameForceFieldInfo(313, "English Hallway/Teacher's Lounge Hallway"),
+        GameForceFieldInfo(314, "Science Lab/Art Closet"),
+        GameForceFieldInfo(315, "Art Hallway/Art Class"),
+        GameForceFieldInfo(316, "Art Closet/Art Class"),
+        GameForceFieldInfo(317, "Teacher's Lounge/Courtyard"),
     ]
 )
 
 # Wholesale
 wholesale = GameWorldInfo(
-    "Wholesale",
+    400, "wholesale", "Wholesale",
     [
         GameCourseInfo("To the Top", CourseType.Standard, [
             GameStarInfo(400, "Complete the course", StarType.CourseComplete),
@@ -392,12 +410,20 @@ wholesale = GameWorldInfo(
         GameWorldConnection("Checkout", "Cart Storage", ["Checkout/Cart Storage"], ["Pogo Trial 1"]),
         GameWorldConnection("Checkout", "Shopping Area", ["Checkout/Shopping Area"], ["To the Top", "Duct and Cover"]),
         GameWorldConnection("Shopping Area", "Under the Shelves", ["Under the Shelves"], ["To the Top", "Duct and Cover", "Meat Market", "Returns", "Meat Grinder", "Chase Through the Store"]),
+    ],
+    force_fields= [
+        GameForceFieldInfo(410, "Employee Hallway/Checkout"),
+        GameForceFieldInfo(411, "Employee Hallway/Janitor's Closet"),
+        GameForceFieldInfo(412, "Under the Shelves"),
+        GameForceFieldInfo(413, "Checkout/Cart Storage"),
+        GameForceFieldInfo(414, "Employee Hallway/Breakroom"),
+        GameForceFieldInfo(415, "Checkout/Shopping Area"),
     ]
 )
 
 # Master Class
 master_class = GameWorldInfo(
-    "Master Class",
+    500, "master_class", "Master Class",
     [
         GameCourseInfo("Air Control Mastery", CourseType.Standard, [
             GameStarInfo(500, "Complete the course", StarType.CourseComplete),
@@ -464,7 +490,7 @@ master_class = GameWorldInfo(
 
 # Basement
 basement = GameWorldInfo(
-    "Basement",
+    600, "basement", "Basement",
     [
         GameCourseInfo("Race to the Summit", CourseType.Standard, [
             GameStarInfo(600, "Complete the course", StarType.CourseComplete),
@@ -539,12 +565,18 @@ basement = GameWorldInfo(
         GameWorldConnection("Dining Room", "Kitchen"),
         GameWorldConnection("Kitchen", "Basement Storage", ["Kitchen/Basement Storage"], ["Fancy Footwork"]),
         GameWorldConnection("Basement Storage", "Den", ["Basement Storage/Den"], ["Chase The Meaning"]),
+    ],
+    force_fields= [
+        GameForceFieldInfo(610, "Foyer/Living Room"),
+        GameForceFieldInfo(611, "Foyer/Dining Room"),
+        GameForceFieldInfo(612, "Kitchen/Basement Storage"),
+        GameForceFieldInfo(613, "Basement Storage/Den"),
     ]
 )
 
 # Rocco's Arcade
 roccos_arcade = GameWorldInfo(
-    "Rocco's Arcade",
+    700, "roccos_arcade", "Rocco's Arcade",
     [
         GameCourseInfo("Arcade Action", CourseType.Standard, [
             GameStarInfo(700, "Complete the course", StarType.CourseComplete),

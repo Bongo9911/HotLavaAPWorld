@@ -1,5 +1,5 @@
 from BaseClasses import Location, LocationProgressType
-from .Data import load_world_data
+from .Data import game_world_dict
 from .CourseType import CourseType
 from .StarType import StarType
 
@@ -10,50 +10,40 @@ class HotLavaLocation(Location):
 class HotLavaLocationInfo():
     id: int
     name: str
-    courseType: CourseType
-    starType: StarType
+    course_type: CourseType
+    star_type: StarType
     
-    def __init__(self, id, name, courseType, starType):
+    def __init__(self, id, name, course_type, star_type):
         self.id = id
         self.name = name
-        self.courseType = courseType
-        self.starType = starType
+        self.course_type = course_type
+        self.star_type = star_type
 
 courses_by_world: dict[str, dict[str, list[HotLavaLocationInfo]]] = None
 
-def build_locations_from_json():   
-    worlds = load_world_data()
-
+def build_locations():
     courses_by_world = {}
 
-    worldIdOffset = 100
-    for world in worlds:
+    for world in game_world_dict.values():
         course_table: dict[str, dict[str, HotLavaLocationInfo]] = {}
-        courses_by_world[world["Name"]] = course_table
-
-        courseIdOffset = 0
-        for course in world["Courses"]:
-            location_list: list[HotLavaLocationInfo] = []
-            course_table[course["Name"]] = location_list
-            
-            for index, star in enumerate(course["Stars"]):
-                name: str = world["Name"] + " - " + course["Name"] + " - " + star["Name"]
-                location: HotLavaLocationInfo = HotLavaLocationInfo(worldIdOffset + courseIdOffset + index, name, course["CourseType"], star["StarType"])
-                location_list.append(location)
-
-            if (course["CourseType"] == CourseType.Standard):
-                courseIdOffset += 10
-            else:
-                courseIdOffset += 1
+        courses_by_world[world.name] = course_table
         
-        worldIdOffset += 100
+        for course in world.courses:
+            location_list: list[HotLavaLocationInfo] = []
+            course_table[course.name] = location_list
+            
+            for star in course.stars:
+                name: str = world.name + " - " + course.name + " - " + star.name
+                location: HotLavaLocationInfo = HotLavaLocationInfo(star.id, name, course.course_type, star.star_type)
+                location_list.append(location)
+        
     return courses_by_world
 
 def get_courses_by_world():
     global courses_by_world
     
     if (courses_by_world == None):
-        courses_by_world = build_locations_from_json()
+        courses_by_world = build_locations()
     return courses_by_world
 
 def get_location_name_to_id_for_all():
