@@ -8,12 +8,16 @@ class GameStarInfo():
     id: int
     name: str
     star_type: StarType
+    # Overrides the list of required abilities for the course
+    required_abilities: list[list[str]] | None = field(default=None)
 
 @dataclass
 class GameCourseInfo():
     name: str
     course_type: CourseType
     stars: list[GameStarInfo] = field(default_factory=list)
+    # The list of required abilities to complete the course. The player must have at least 1 ability from each inner list in the list
+    required_abilities: list[list[str]] | None = field(default=None)
 
 @dataclass
 class GameWorldConnection():
@@ -49,16 +53,16 @@ gym_class = GameWorldInfo(
             GameStarInfo(104, "No Deaths", StarType.NoDeaths),
             GameStarInfo(105, "Grab the golden pin", StarType.GoldenPin),
             GameStarInfo(106, "Buddy Mode", StarType.Buddy),
-        ]),
+        ], required_abilities=[["Climb"], ["Swing"], ["Wall Jump"]]), # Has Grab and Wall Jump
         GameCourseInfo("Trampoline Trouble", CourseType.Standard, [
             GameStarInfo(110, "Complete the course", StarType.CourseComplete),
             GameStarInfo(111, "Complete in under 02:30", StarType.MinTime),
             GameStarInfo(112, "Complete in under 01:00", StarType.MinTime),
             GameStarInfo(113, "Don't perform any swings", StarType.Challenge),
             GameStarInfo(114, "No Deaths", StarType.NoDeaths),
-            GameStarInfo(115, "Grab the golden pin", StarType.GoldenPin),
+            GameStarInfo(115, "Grab the golden pin", StarType.GoldenPin, required_abilities=[["Special"]]), # Override to say Golden Pin requires Special only
             GameStarInfo(116, "Buddy Mode", StarType.Buddy),
-        ]),
+        ], required_abilities=[["Swing", "Special"]]), # Has Grab or a special ability
         GameCourseInfo("Livin' on the Ledge", CourseType.Standard, [
             GameStarInfo(120, "Complete the course", StarType.CourseComplete),
             GameStarInfo(121, "Complete in under 02:00", StarType.MinTime),
@@ -67,7 +71,7 @@ gym_class = GameWorldInfo(
             GameStarInfo(124, "No Deaths", StarType.NoDeaths),
             GameStarInfo(125, "Grab the golden pin", StarType.GoldenPin),
             GameStarInfo(126, "Buddy Mode", StarType.Buddy),
-        ]),
+        ], required_abilities=[["Climb"], ["Swing"]]),
         GameCourseInfo("Surfing Surfaces", CourseType.Standard, [
             GameStarInfo(130, "Complete the course", StarType.CourseComplete),
             GameStarInfo(131, "Complete in under 01:50", StarType.MinTime),
@@ -76,7 +80,7 @@ gym_class = GameWorldInfo(
             GameStarInfo(134, "No Deaths", StarType.NoDeaths),
             GameStarInfo(135, "Grab the golden pin", StarType.GoldenPin),
             GameStarInfo(136, "Buddy Mode", StarType.Buddy),
-        ]),
+        ], required_abilities=[["Surf"]]),
         GameCourseInfo("Pole Vault", CourseType.Standard, [
             GameStarInfo(140, "Complete the course", StarType.CourseComplete),
             GameStarInfo(141, "Complete in under 02:30", StarType.MinTime),
@@ -85,7 +89,7 @@ gym_class = GameWorldInfo(
             GameStarInfo(144, "No Deaths", StarType.NoDeaths),
             GameStarInfo(145, "Grab the golden pin", StarType.GoldenPin),
             GameStarInfo(146, "Buddy Mode", StarType.Buddy),
-        ]),
+        ], required_abilities=[["Climb"], ["Swing"]]),
         GameCourseInfo("Chase Your Sister", CourseType.Standard, [
             GameStarInfo(150, "Complete the course", StarType.CourseComplete),
             GameStarInfo(151, "Complete in under 01:10", StarType.MinTime),
@@ -145,7 +149,7 @@ playground = GameWorldInfo(
             GameStarInfo(214, "Grab the golden pin", StarType.GoldenPin),
             GameStarInfo(215, "Find the hidden G.A.T. comic", StarType.Comic),
             GameStarInfo(216, "Buddy Mode", StarType.Buddy),
-        ]),
+        ], required_abilities=[["Swing"]]),
         GameCourseInfo("Bouncy Castle", CourseType.Standard, [
             GameStarInfo(220, "Complete the course", StarType.CourseComplete),
             GameStarInfo(221, "Complete in under 04:30", StarType.MinTime),
@@ -154,7 +158,7 @@ playground = GameWorldInfo(
             GameStarInfo(224, "Grab the golden pin", StarType.GoldenPin),
             GameStarInfo(225, "Find the hidden G.A.T. comic", StarType.Comic),
             GameStarInfo(226, "Buddy Mode", StarType.Buddy),
-        ]),
+        ], required_abilities=[["Crouch"]]),
         GameCourseInfo("Back to Class", CourseType.Standard, [
             GameStarInfo(230, "Complete the course", StarType.CourseComplete),
             GameStarInfo(231, "Complete in under 06:00", StarType.MinTime),
@@ -163,7 +167,7 @@ playground = GameWorldInfo(
             GameStarInfo(234, "Grab the golden pin", StarType.GoldenPin),
             GameStarInfo(235, "Find the hidden G.A.T. comic", StarType.Comic),
             GameStarInfo(236, "Buddy Mode", StarType.Buddy),
-        ]),
+        ], required_abilities=[["Swing"]]),
         GameCourseInfo("Sports Day", CourseType.Standard, [
             GameStarInfo(240, "Complete the course", StarType.CourseComplete),
             GameStarInfo(241, "Complete in under 01:40", StarType.MinTime),
@@ -172,7 +176,7 @@ playground = GameWorldInfo(
             GameStarInfo(244, "Grab the golden pin", StarType.GoldenPin),
             GameStarInfo(245, "Find the hidden G.A.T. comic", StarType.Comic),
             GameStarInfo(246, "Buddy Mode", StarType.Buddy),
-        ]),
+        ], required_abilities=[["Swing"]]),
         GameCourseInfo("Chase the Big Kid", CourseType.Standard, [
             GameStarInfo(250, "Complete the course", StarType.CourseComplete),
             GameStarInfo(251, "Complete in under 01:15", StarType.MinTime),
@@ -180,7 +184,7 @@ playground = GameWorldInfo(
             GameStarInfo(253, "Tag your sister", StarType.Challenge),
             GameStarInfo(254, "Grab the golden pin", StarType.GoldenPin),
             GameStarInfo(255, "Find the hidden G.A.T. comic", StarType.Comic),
-            GameStarInfo(256, "Chase Buddy", StarType.BuddyChase),
+            GameStarInfo(256, "Chase Buddy", StarType.BuddyChase, required_abilities=[["Swing"]]),
         ]),
         GameCourseInfo("Pogo Trial 1", CourseType.Pogo, [
             GameStarInfo(260, "Find all the checkpoints using the Pogo Stick", StarType.TrialComplete),
@@ -199,7 +203,7 @@ playground = GameWorldInfo(
         ]),
         GameCourseInfo("Chase the Grade", CourseType.Chase, [
             GameStarInfo(265, "Complete the course", StarType.TrialComplete),
-        ]),
+        ], required_abilities=[["Swing"]]),
         GameCourseInfo("All Course Marathon", CourseType.AllCourseMarathon, [
             GameStarInfo(266, "Complete the course", StarType.TrialComplete),
         ]),
@@ -226,7 +230,7 @@ school = GameWorldInfo(
             GameStarInfo(304, "Grab the golden pin", StarType.GoldenPin),
             GameStarInfo(305, "Find the hidden G.A.T. comic", StarType.Comic),
             GameStarInfo(306, "Buddy Mode", StarType.Buddy),
-        ]),
+        ], required_abilities=[["Climb"], ["Swing"]]),
         GameCourseInfo("Middle School Mischief", CourseType.Standard, [
             GameStarInfo(310, "Complete the course", StarType.CourseComplete),
             GameStarInfo(311, "Complete in under 11:00", StarType.MinTime),
@@ -235,16 +239,16 @@ school = GameWorldInfo(
             GameStarInfo(314, "Grab the golden pin", StarType.GoldenPin),
             GameStarInfo(315, "Find the hidden G.A.T. comic", StarType.Comic),
             GameStarInfo(316, "Buddy Mode", StarType.Buddy),
-        ]),
+        ], required_abilities=[["Climb"], ["Swing"], ["Crouch"], ["Wall Jump"]]),
         GameCourseInfo("Repeat the Grade", CourseType.Standard, [
             GameStarInfo(320, "Complete the course", StarType.CourseComplete),
             GameStarInfo(321, "Complete in under 10:00", StarType.MinTime),
             GameStarInfo(322, "Complete in under 03:30", StarType.MinTime),
             GameStarInfo(323, "No Deaths", StarType.NoDeaths),
-            GameStarInfo(324, "Grab the golden pin", StarType.GoldenPin),
+            GameStarInfo(324, "Grab the golden pin", StarType.GoldenPin, required_abilities=[["Climb"], ["Special"]]),
             GameStarInfo(325, "Find the hidden G.A.T. comic", StarType.Comic),
             GameStarInfo(326, "Buddy Mode", StarType.Buddy),
-        ]),
+        ], required_abilities=[["Climb"], ["Swing"]]),
         GameCourseInfo("Senior Trip", CourseType.Standard, [
             GameStarInfo(330, "Complete the course", StarType.CourseComplete),
             GameStarInfo(331, "Complete in under 08:00", StarType.MinTime),
@@ -253,7 +257,7 @@ school = GameWorldInfo(
             GameStarInfo(334, "Grab the golden pin", StarType.GoldenPin),
             GameStarInfo(335, "Find the hidden G.A.T. comic", StarType.Comic),
             GameStarInfo(336, "Buddy Mode", StarType.Buddy),
-        ]),
+        ], required_abilities=[["Climb"], ["Swing"], ["Surf"]]),
         GameCourseInfo("Freshman Frenzy", CourseType.Standard, [
             GameStarInfo(340, "Complete the course", StarType.CourseComplete),
             GameStarInfo(341, "Complete in under 10:00", StarType.MinTime),
@@ -262,7 +266,7 @@ school = GameWorldInfo(
             GameStarInfo(344, "Grab the golden pin", StarType.GoldenPin),
             GameStarInfo(345, "Find the hidden G.A.T. comic", StarType.Comic),
             GameStarInfo(346, "Buddy Mode", StarType.Buddy),
-        ]),
+        ], required_abilities=[["Crouch"], ["Wall Jump"], ["Double Jump", "Climb"], ["Swing"], ["Surf"]]),
         GameCourseInfo("Chase Your Sister", CourseType.Standard, [
             GameStarInfo(350, "Complete the course", StarType.CourseComplete),
             GameStarInfo(351, "Complete in under 02:00", StarType.MinTime),
@@ -270,8 +274,8 @@ school = GameWorldInfo(
             GameStarInfo(353, "Tag your sister", StarType.Challenge),
             GameStarInfo(354, "Grab the golden pin", StarType.GoldenPin),
             GameStarInfo(355, "Find the hidden G.A.T. comic", StarType.Comic),
-            GameStarInfo(356, "Chase The Escaped Dog", StarType.BuddyChase),
-        ]),
+            GameStarInfo(356, "Chase The Escaped Dog", StarType.BuddyChase, required_abilities=[["Surf"], ["Swing"], ["Wall Jump"]]),
+        ], required_abilities=[["Surf"], ["Swing"]]),
         GameCourseInfo("Pogo Trial 1", CourseType.Pogo, [
             GameStarInfo(360, "Find all the checkpoints using the Pogo Stick", StarType.TrialComplete),
         ]),
@@ -289,7 +293,7 @@ school = GameWorldInfo(
         ]),
         GameCourseInfo("Chase the Grade", CourseType.Chase, [
             GameStarInfo(365, "Complete the course", StarType.TrialComplete),
-        ]),
+        ], required_abilities=[["Surf"], ["Swing"]]),
         GameCourseInfo("All Course Marathon", CourseType.AllCourseMarathon, [
             GameStarInfo(366, "Complete the course", StarType.TrialComplete),
         ]),
@@ -335,7 +339,7 @@ wholesale = GameWorldInfo(
             GameStarInfo(404, "Grab the golden pin", StarType.GoldenPin),
             GameStarInfo(405, "Find the hidden G.A.T. comic", StarType.Comic),
             GameStarInfo(406, "Buddy Mode", StarType.Buddy),
-        ]),
+        ], required_abilities=[["Wall Jump"], ["Climb"]]),
         GameCourseInfo("Duct and Cover", CourseType.Standard, [
             GameStarInfo(410, "Complete the course", StarType.CourseComplete),
             GameStarInfo(411, "Complete in under 08:00", StarType.MinTime),
@@ -344,7 +348,7 @@ wholesale = GameWorldInfo(
             GameStarInfo(414, "Grab the golden pin", StarType.GoldenPin),
             GameStarInfo(415, "Find the hidden G.A.T. comic", StarType.Comic),
             GameStarInfo(416, "Buddy Mode", StarType.Buddy),
-        ]),
+        ], required_abilities=[["Wall Jump"], ["Swing"]]),
         GameCourseInfo("Meat Market", CourseType.Standard, [
             GameStarInfo(420, "Complete the course", StarType.CourseComplete),
             GameStarInfo(421, "Complete in under 08:00", StarType.MinTime),
@@ -353,7 +357,7 @@ wholesale = GameWorldInfo(
             GameStarInfo(424, "Grab the golden pin", StarType.GoldenPin),
             GameStarInfo(425, "Find the hidden G.A.T. comic", StarType.Comic),
             GameStarInfo(426, "Buddy Mode", StarType.Buddy),
-        ]),
+        ], required_abilities=[["Crouch"], ["Swing"], ["Wall Jump"]]),
         GameCourseInfo("Returns", CourseType.Standard, [
             GameStarInfo(430, "Complete the course", StarType.CourseComplete),
             GameStarInfo(431, "Complete in under 04:00", StarType.MinTime),
@@ -362,7 +366,7 @@ wholesale = GameWorldInfo(
             GameStarInfo(434, "Grab the golden pin", StarType.GoldenPin),
             GameStarInfo(435, "Find the hidden G.A.T. comic", StarType.Comic),
             GameStarInfo(436, "Buddy Mode", StarType.Buddy),
-        ]),
+        ], required_abilities=None),
         GameCourseInfo("Meat Grinder", CourseType.Standard, [
             GameStarInfo(440, "Complete the course", StarType.CourseComplete),
             GameStarInfo(441, "Complete in under 10:00", StarType.MinTime),
@@ -371,7 +375,7 @@ wholesale = GameWorldInfo(
             GameStarInfo(444, "Grab the golden pin", StarType.GoldenPin),
             GameStarInfo(445, "Find the hidden G.A.T. comic", StarType.Comic),
             GameStarInfo(446, "Buddy Mode", StarType.Buddy),
-        ]),
+        ], required_abilities=[["Climb"], ["Swing"], ["Crouch"], ["Wall Jump"]]),
         GameCourseInfo("Chase Through the Store", CourseType.Standard, [
             GameStarInfo(450, "Complete the course", StarType.CourseComplete),
             GameStarInfo(451, "Complete in under 00:50", StarType.MinTime),
@@ -379,8 +383,8 @@ wholesale = GameWorldInfo(
             GameStarInfo(453, "No Deaths", StarType.NoDeaths),
             GameStarInfo(454, "Grab the golden pin", StarType.GoldenPin),
             GameStarInfo(455, "Find the hidden G.A.T. comic", StarType.Comic),
-            GameStarInfo(456, "Chase the Runaway Dog", StarType.BuddyChase),
-        ]),
+            GameStarInfo(456, "Chase the Runaway Dog", StarType.BuddyChase, required_abilities=[["Wall Jump"]]),
+        ], required_abilities=None),
         GameCourseInfo("Pogo Trial 1", CourseType.Pogo, [
             GameStarInfo(460, "Find all the checkpoints using the Pogo Stick", StarType.TrialComplete),
         ]),
@@ -398,7 +402,7 @@ wholesale = GameWorldInfo(
         ]),
         GameCourseInfo("Chase the Grade", CourseType.Chase, [
             GameStarInfo(465, "Complete the course", StarType.TrialComplete),
-        ]),
+        ], required_abilities=[["Wall Jump"]]),
         GameCourseInfo("All Course Marathon", CourseType.AllCourseMarathon, [
             GameStarInfo(466, "Complete the course", StarType.TrialComplete),
         ]),
@@ -432,7 +436,7 @@ master_class = GameWorldInfo(
             GameStarInfo(503, "No Deaths", StarType.NoDeaths),
             GameStarInfo(504, "Reach a speed of 4.5", StarType.Challenge),
             GameStarInfo(505, "Grab the golden pin", StarType.GoldenPin),
-        ]),
+        ], required_abilities=None),
         GameCourseInfo("Wall Jump Mastery", CourseType.Standard, [
             GameStarInfo(510, "Complete the course", StarType.CourseComplete),
             GameStarInfo(511, "Complete in under 02:30", StarType.MinTime),
@@ -440,15 +444,15 @@ master_class = GameWorldInfo(
             GameStarInfo(513, "No Deaths", StarType.NoDeaths),
             GameStarInfo(514, "Spend less than 10 seconds on the ground", StarType.Challenge),
             GameStarInfo(515, "Grab the golden pin", StarType.GoldenPin),
-        ]),
+        ], required_abilities=[["Wall Jump"]]),
         GameCourseInfo("Surf Mastery", CourseType.Standard, [
             GameStarInfo(520, "Complete the course", StarType.CourseComplete),
             GameStarInfo(521, "Complete in under 01:00", StarType.MinTime),
             GameStarInfo(522, "Complete in under 00:30", StarType.MinTime),
             GameStarInfo(523, "No Deaths", StarType.NoDeaths),
             GameStarInfo(524, "Complete in 5 jumps or less", StarType.Challenge),
-            GameStarInfo(525, "Grab the golden pin", StarType.GoldenPin),
-        ]),
+            GameStarInfo(525, "Grab the golden pin", StarType.GoldenPin, required_abilities=[["Surf"]]),
+        ], required_abilities=[["Surf", "Special"]]),
         GameCourseInfo("Boosting Mastery", CourseType.Standard, [
             GameStarInfo(530, "Complete the course", StarType.CourseComplete),
             GameStarInfo(531, "Complete in under 04:00", StarType.MinTime),
@@ -472,7 +476,7 @@ master_class = GameWorldInfo(
             GameStarInfo(553, "No Deaths", StarType.NoDeaths),
             GameStarInfo(554, "Reach a speed of 9", StarType.Challenge),
             GameStarInfo(555, "Grab the golden pin", StarType.GoldenPin),
-        ]),
+        ], required_abilities=[["Swing"], ["Wall Jump"], ["Surf"], ["Special"]]),
         GameCourseInfo("Pogo Trial", CourseType.Pogo, [
             GameStarInfo(560, "Find all the checkpoints using the Pogo Stick", StarType.TrialComplete),
         ]),
@@ -500,7 +504,7 @@ basement = GameWorldInfo(
             GameStarInfo(604, "Grab the golden pin", StarType.GoldenPin),
             GameStarInfo(605, "Find the hidden G.A.T. comic", StarType.Comic),
             GameStarInfo(606, "Buddy Mode", StarType.Buddy),
-        ]),
+        ], required_abilities=[["Wall Jump"], ["Climb"], ["Swing"]]),
         GameCourseInfo("Lights Out", CourseType.Standard, [
             GameStarInfo(610, "Complete the course", StarType.CourseComplete),
             GameStarInfo(611, "Complete in under 03:00", StarType.MinTime),
@@ -509,7 +513,7 @@ basement = GameWorldInfo(
             GameStarInfo(614, "Grab the golden pin", StarType.GoldenPin),
             GameStarInfo(615, "Find the hidden G.A.T. comic", StarType.Comic),
             GameStarInfo(616, "Buddy Mode", StarType.Buddy),
-        ]),
+        ], required_abilities=[["Wall Jump"], ["Swing"], ["Surf"]]),
         GameCourseInfo("Temple Sprint", CourseType.Standard, [
             GameStarInfo(620, "Complete the course", StarType.CourseComplete),
             GameStarInfo(621, "Complete in under 04:20", StarType.MinTime),
@@ -518,7 +522,7 @@ basement = GameWorldInfo(
             GameStarInfo(624, "Grab the golden pin", StarType.GoldenPin),
             GameStarInfo(625, "Find the hidden G.A.T. comic", StarType.Comic),
             GameStarInfo(626, "Buddy Mode", StarType.Buddy),
-        ]),
+        ], required_abilities=[["Climb"], ["Swing"], ["Surf"]]),
         GameCourseInfo("Fancy Footwork", CourseType.Standard, [
             GameStarInfo(630, "Complete the course", StarType.CourseComplete),
             GameStarInfo(631, "Complete in under 06:00", StarType.MinTime),
@@ -527,7 +531,7 @@ basement = GameWorldInfo(
             GameStarInfo(634, "Grab the golden pin", StarType.GoldenPin),
             GameStarInfo(635, "Find the hidden G.A.T. comic", StarType.Comic),
             GameStarInfo(636, "Buddy Mode", StarType.Buddy),
-        ]),
+        ], required_abilities=[["Wall Jump"], ["Swing"], ["Surf"]]),
         GameCourseInfo("Minecart Carnage", CourseType.Standard, [
             GameStarInfo(640, "Complete the course", StarType.CourseComplete),
             GameStarInfo(641, "Complete in under 08:00", StarType.MinTime),
@@ -536,7 +540,7 @@ basement = GameWorldInfo(
             GameStarInfo(644, "Grab the golden pin", StarType.GoldenPin),
             GameStarInfo(645, "Find the hidden G.A.T. comic", StarType.Comic),
             GameStarInfo(646, "Buddy Mode", StarType.Buddy),
-        ]),
+        ], required_abilities=[["Climb"], ["Swing"], ["Wall Jump"], ["Crouch"], ["Surf"]]),
         GameCourseInfo("Chase The Meaning", CourseType.Standard, [
             GameStarInfo(650, "Complete the course", StarType.CourseComplete),
             GameStarInfo(651, "Complete in under 03:00", StarType.MinTime),
@@ -544,8 +548,8 @@ basement = GameWorldInfo(
             GameStarInfo(653, "Tag your sister", StarType.Challenge),
             GameStarInfo(654, "Grab the golden pin", StarType.GoldenPin),
             GameStarInfo(655, "Find the hidden G.A.T. comic", StarType.Comic),
-            GameStarInfo(656, "Wild Teddy Chase", StarType.BuddyChase),
-        ]),
+            GameStarInfo(656, "Wild Teddy Chase", StarType.BuddyChase, required_abilities=[["Wall Jump"]]),
+        ], required_abilities=[["Climb"], ["Swing"]]),
         GameCourseInfo("Pogo Trial", CourseType.Pogo, [
             GameStarInfo(660, "Find all the checkpoints using the Pogo Stick", StarType.TrialComplete),
         ]),
@@ -586,7 +590,7 @@ roccos_arcade = GameWorldInfo(
             GameStarInfo(704, "Grab the golden pin", StarType.GoldenPin),
             GameStarInfo(705, "Find the Mini Rocco", StarType.Comic),
             GameStarInfo(706, "Buddy Mode", StarType.Buddy),
-        ]),
+        ], required_abilities=[["Climb"], ["Swing"], ["Crouch"], ["Wall Jump"]]),
         GameCourseInfo("Rocco's Rumpus Room", CourseType.Standard, [
             GameStarInfo(710, "Complete the course", StarType.CourseComplete),
             GameStarInfo(711, "Complete in under 02:20", StarType.MinTime),
@@ -595,7 +599,7 @@ roccos_arcade = GameWorldInfo(
             GameStarInfo(714, "Grab the golden pin", StarType.GoldenPin),
             GameStarInfo(715, "Find the Mini Rocco", StarType.Comic),
             GameStarInfo(716, "Buddy Mode", StarType.Buddy),
-        ]),
+        ], required_abilities=[["Climb"], ["Swing"], ["Crouch"]]),
         GameCourseInfo("Employees Only", CourseType.Standard, [
             GameStarInfo(720, "Complete the course", StarType.CourseComplete),
             GameStarInfo(721, "Complete in under 04:20", StarType.MinTime),
@@ -604,7 +608,7 @@ roccos_arcade = GameWorldInfo(
             GameStarInfo(724, "Find and open all the gas valves", StarType.Challenge),
             GameStarInfo(725, "Find the Mini Rocco", StarType.Comic),
             GameStarInfo(726, "Buddy Mode", StarType.Buddy),
-        ]),
+        ], required_abilities=[["Climb"], ["Swing"], ["Crouch"]]),
         GameCourseInfo("Storage Room Spree", CourseType.Standard, [
             GameStarInfo(730, "Complete the course", StarType.CourseComplete),
             GameStarInfo(731, "Complete in under 02:00", StarType.MinTime),
@@ -613,7 +617,7 @@ roccos_arcade = GameWorldInfo(
             GameStarInfo(734, "Grab the golden pin", StarType.GoldenPin),
             GameStarInfo(735, "Find the Mini Rocco", StarType.Comic),
             GameStarInfo(736, "Buddy Mode", StarType.Buddy),
-        ]),
+        ], required_abilities=[["Climb"], ["Swing"]]),
         GameCourseInfo("Birthday Blowout", CourseType.Standard, [
             GameStarInfo(740, "Complete the course", StarType.CourseComplete),
             GameStarInfo(741, "Complete in under 03:00", StarType.MinTime),
@@ -622,7 +626,7 @@ roccos_arcade = GameWorldInfo(
             GameStarInfo(744, "Grab the golden pin", StarType.GoldenPin),
             GameStarInfo(745, "No Deaths", StarType.NoDeaths),
             GameStarInfo(746, "Buddy Mode", StarType.Buddy),
-        ]),
+        ], required_abilities=[["Climb"], ["Swing"], ["Crouch"]]),
         GameCourseInfo("Chase to the Arcade", CourseType.Standard, [
             GameStarInfo(750, "Complete the course", StarType.CourseComplete),
             GameStarInfo(751, "Complete in under 00:55", StarType.MinTime),
@@ -630,8 +634,8 @@ roccos_arcade = GameWorldInfo(
             GameStarInfo(753, "Tag your sister", StarType.Challenge),
             GameStarInfo(754, "Grab the golden pin", StarType.GoldenPin),
             GameStarInfo(755, "Find the Mini Rocco", StarType.Comic),
-            GameStarInfo(756, "Where's Buddy?", StarType.BuddyChase),
-        ]),
+            GameStarInfo(756, "Where's Buddy?", StarType.BuddyChase, required_abilities=[["Climb"], ["Swing"], ["Crouch"]]),
+        ], required_abilities=[["Wall Jump"], ["Swing"]]),
         GameCourseInfo("Pogo Trial 1", CourseType.Pogo, [
             GameStarInfo(760, "Find all the checkpoints using the Pogo Stick", StarType.TrialComplete),
         ]),

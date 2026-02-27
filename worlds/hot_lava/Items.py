@@ -41,6 +41,22 @@ filler_items: dict[str, HotLavaItemData] = {
     "Star": HotLavaItemData(2, ItemClassification.progression_skip_balancing),
 }
 
+special_ability_items: dict[str, HotLavaItemData] = {
+    "Double Jump": HotLavaItemData(10, ItemClassification.progression),
+    "Boost Jump": HotLavaItemData(11, ItemClassification.progression),
+    "Slide Jump": HotLavaItemData(12, ItemClassification.progression),
+    "Vault Jump": HotLavaItemData(13, ItemClassification.progression),
+}
+
+standard_ability_items: dict[str, HotLavaItemData] = {
+    "Crouch": HotLavaItemData(20, ItemClassification.progression),
+    "Grab": HotLavaItemData(21, ItemClassification.progression),
+    "Surf": HotLavaItemData(22, ItemClassification.progression),
+    "Wall Jump": HotLavaItemData(23, ItemClassification.progression),
+    "Swing": HotLavaItemData(24, ItemClassification.progression),
+    "Climb": HotLavaItemData(25, ItemClassification.progression),
+}
+
 world_unlock_items: dict[str, HotLavaWorldUnlockItemData] = None
 force_field_items: dict[str, HotLavaForceFieldItemData] = None
 
@@ -50,6 +66,7 @@ item_data_table: dict[str, HotLavaItemData] = None
 def build_items():
     global world_unlock_items
     world_unlock_items = {}
+    force_field_items = {}
     
     for world in game_world_dict.values():
         world_unlock_name = "World Unlock - " + world.name
@@ -66,12 +83,9 @@ def get_all_items_table() -> dict[str, HotLavaItemData]:
     global item_data_table
     
     if (item_data_table == None):
-        # items_by_world = get_items_by_world()
         build_items()
         
-        item_data_table = {**filler_items, **world_unlock_items}
-        # for world in items_by_world:
-        #     item_data_table.update(items_by_world[world])
+        item_data_table = {**filler_items, **special_ability_items, **standard_ability_items, **world_unlock_items}
         
     return item_data_table
 
@@ -103,6 +117,16 @@ def create_all_items(world: HotLavaWorld):
         for force_field_name in force_fields:
             item = world.create_item(force_field_name)
             world.multiworld.itempool.append(item)
+            
+    #TODO: Setting to enable/disable this
+    for ability_name in special_ability_items:
+        item = world.create_item(ability_name)
+        world.multiworld.itempool.append(item)
+        
+    #TODO: Setting to enable/disable this
+    for ability_name in standard_ability_items:
+        item = world.create_item(ability_name)
+        world.multiworld.itempool.append(item)
             
     junk = world.get_total_locations() - len(world.multiworld.itempool)  # calculate this based on player options
     

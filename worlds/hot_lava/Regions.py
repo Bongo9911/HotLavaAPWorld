@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from typing import Callable, Optional, TYPE_CHECKING
 
+from worlds.generic.Rules import add_rule
+
 from .Data import GameCourseInfo, GameStarInfo, game_world_dict
 from .Locations import HotLavaLocation, HotLavaLocationInfo, get_locations_info_for_course
 from .CourseType import CourseType
@@ -12,6 +14,7 @@ if TYPE_CHECKING:
     from .World import HotLavaWorld
 
 def create_regions_for_all_worlds(world: HotLavaWorld, menu_region: Region) -> None:
+    create_intro_regions(world, menu_region)
     create_gym_class_regions(world, menu_region)
     create_playground_regions(world, menu_region)
     create_school_regions(world, menu_region)
@@ -19,6 +22,14 @@ def create_regions_for_all_worlds(world: HotLavaWorld, menu_region: Region) -> N
     create_master_class_regions(world, menu_region)
     create_basement_regions(world, menu_region)
     create_roccos_arcade_regions(world, menu_region)
+    
+def create_intro_regions(world: HotLavaWorld, menu_region: Region) -> None:
+    world_name = "Intro"
+    world_region = create_world_region(world, menu_region, world_name)
+    
+    location = HotLavaLocation(world.player, "Intro - Complete the Intro.", 1, world_region)
+    world_region.locations.append(location)
+    location.progress_type = LocationProgressType.PRIORITY
 
 def create_gym_class_regions(world: HotLavaWorld, menu_region: Region) -> None:
     world_name = "Gym Class"
@@ -258,14 +269,18 @@ def create_basement_regions(world: HotLavaWorld, menu_region: Region) -> None:
     
 def create_roccos_arcade_regions(world: HotLavaWorld, menu_region: Region) -> None:
     world_name = "Rocco's Arcade"
-    buddy_region_base = "Arcade"
+    buddy_region_base = "Arcade Rafters"
     buddy_region_name = world_name + " - " + buddy_region_base
     
     world_region = create_world_region(world, menu_region, world_name)
     
-    arcade_region = create_region_for_world(world, world_name, buddy_region_base)
+    arcade_region = create_region_for_world(world, world_name, "Arcade")
     world_region.connect(arcade_region)
     # menu_region.connect(arcade_region, rule=lambda collection: collection.has("World Unlock - " + world_name, world.player))
+    
+    arcade_rafters_region = create_region_for_world(world, world_name, "Arcade Rafters")
+    arcade_rafters_entrance = arcade_region.connect(arcade_rafters_region)
+    add_rule(arcade_rafters_entrance, lambda state: state.has_all(["Climb", "Swing"], world.player))
     
     create_region_for_course(world, world_name, "Arcade Action", arcade_region, buddy_region_name)
     create_region_for_course(world, world_name, "Rocco's Rumpus Room", arcade_region, buddy_region_name)
@@ -300,18 +315,33 @@ def create_region_for_course(world: HotLavaWorld, world_name: str, course_name: 
     locationsInfo = get_locations_info_for_course(world_name, course_name)
     
     for locationInfo in locationsInfo:
-        if(locationInfo.star_type == StarType.Buddy and buddy_region_name != None):
+        if((locationInfo.star_type == StarType.Buddy or locationInfo.star_type == StarType.BuddyChase) and buddy_region_name != None):
             buddy_region = Region(world_name + " - " + course_name + " - Buddy", world.player, world.multiworld)
-            buddy_region.locations.append(build_location(world, buddy_region, locationInfo))
+            location = build_location(world, buddy_region, locationInfo)
+            add_rule(location, lambda state: state.has_all({"Grab"}, world.player)) # TODO: Buddy item
+            buddy_region.locations.append(location)
             world.multiworld.regions.append(buddy_region)
             region.connect(buddy_region, rule=lambda collection: collection.can_reach_region(buddy_region_name, world.player))
         else:
-            region.locations.append(build_location(world, region, locationInfo))
+            location = build_location(world, region, locationInfo)
+            region.locations.append(location)
+            
+        if(locationInfo.required_abilities != None):
+            add_rule(location, lambda state, required_abilities=locationInfo.required_abilities: all(
+                any(evaluate_has_ability(state, ability, world.player) for ability in or_group)
+                for or_group in required_abilities
+            ))            
         
     world.multiworld.regions.append(region)
     
     parent_region.connect(region, rule=rule)
     return region
+
+def evaluate_has_ability(state: CollectionState, ability: str, player: int):
+    if (ability == "Special"):
+        return state.has_any(["Double Jump", "Boost Jump", "Vault Jump"], player) or state.has_all(["Slide Jump", "Crouch"], player)
+    else:
+        return state.has(ability, player)
 
 def build_location(world: HotLavaWorld, region: Region, locationInfo: HotLavaLocationInfo) -> HotLavaLocation:
     location = HotLavaLocation(world.player, locationInfo.name, locationInfo.id, region)
