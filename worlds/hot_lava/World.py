@@ -6,7 +6,7 @@ import settings
 from worlds.generic.Rules import set_rule
 from .Regions import create_regions_for_all_worlds
 from .Items import HotLavaItem, create_all_items, get_all_items_table
-from .Locations import get_all_location_infos, get_location_name_to_id_for_all, get_locations_info_for_world
+from .Locations import build_location_name_groups, get_all_location_infos, get_location_name_to_id_for_all, get_locations_info_for_world
 from .Options import HotLavaOptions
 from .StarType import StarType
 from BaseClasses import CollectionState, Tutorial, ItemClassification, Region
@@ -30,8 +30,13 @@ class HotLavaWorld(World):
     # Items can be grouped using their names to allow easy checking if any item
     # from that group has been collected. Group names can also be used for !hint
     item_name_groups = {
-        # "weapons": {"sword", "lance"},
+        "Worlds": {"World Unlock - Gym Class", "World Unlock - Playground", "World Unlock - School", "World Unlock - Wholesale", "World Unlock - Master Class", "World Unlock - Basement", "World Unlock - Rocco's Arcade"},
+        "Standard Abilities": {"Crouch", "Grab", "Surf", "Wall Jump", "Swing", "Climb"},
+        "Special Abilities": {"Double Jump", "Boost Jump", "Slide Jump", "Vault Jump"},
+        "Trials": {"Pogo", "Tiny Toy", "Jetpack"},
     }
+    
+    location_name_groups = build_location_name_groups()
     
     stars_per_world: dict[str, int] = {}
 
@@ -67,18 +72,19 @@ class HotLavaWorld(World):
         create_all_items(self)
         
     def get_total_locations(self) -> int:
-        total_locations = 0
-        for region in self.multiworld.regions:
-            total_locations += len(region.locations)
-        return total_locations
+        return len(self.multiworld.get_locations(self.player))
 
     def set_rules(self) -> None:
         set_all_rules(self)
         
     def fill_slot_data(self) -> dict[str, Any]: 
         return self.options.as_dict(
-            "world_unlock_logic", "force_field_logic", "enabled_worlds", "start_world", "last_world", "death_link"
+            "death_link"
         )
+        
+        # return self.options.as_dict(
+        #     "world_unlock_logic", "force_field_logic", "enabled_worlds", "start_world", "last_world", "death_link"
+        # )
         
         # slot_data: dict[str, Any] = {}
         

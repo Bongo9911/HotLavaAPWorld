@@ -315,10 +315,13 @@ def create_region_for_course(world: HotLavaWorld, world_name: str, course_name: 
     locationsInfo = get_locations_info_for_course(world_name, course_name)
     
     for locationInfo in locationsInfo:
-        if((locationInfo.star_type == StarType.Buddy or locationInfo.star_type == StarType.BuddyChase) and buddy_region_name != None):
+        if (not is_location_enabled(world, locationInfo)):
+            continue
+        
+        if ((locationInfo.star_type == StarType.Buddy or locationInfo.star_type == StarType.BuddyChase) and buddy_region_name != None):
             buddy_region = Region(world_name + " - " + course_name + " - Buddy", world.player, world.multiworld)
             location = build_location(world, buddy_region, locationInfo)
-            add_rule(location, lambda state: state.has_all({"Grab"}, world.player)) # TODO: Buddy item
+            add_rule(location, lambda state: state.has_all({"Grab"}, world.player))
             buddy_region.locations.append(location)
             world.multiworld.regions.append(buddy_region)
             region.connect(buddy_region, rule=lambda collection: collection.can_reach_region(buddy_region_name, world.player))
@@ -326,7 +329,14 @@ def create_region_for_course(world: HotLavaWorld, world_name: str, course_name: 
             location = build_location(world, region, locationInfo)
             region.locations.append(location)
             
-        if(locationInfo.required_abilities != None):
+        if (locationInfo.course_type == CourseType.Pogo):
+            add_rule(location, lambda state: state.has("Pogo", world.player))
+        elif (locationInfo.course_type == CourseType.TinyToy):
+            add_rule(location, lambda state: state.has("Tiny Toy", world.player))
+        elif (locationInfo.course_type == CourseType.Jetpack):
+            add_rule(location, lambda state: state.has("Jetpack", world.player))
+            
+        if (locationInfo.required_abilities != None):
             add_rule(location, lambda state, required_abilities=locationInfo.required_abilities: all(
                 any(evaluate_has_ability(state, ability, world.player) for ability in or_group)
                 for or_group in required_abilities
@@ -336,6 +346,35 @@ def create_region_for_course(world: HotLavaWorld, world_name: str, course_name: 
     
     parent_region.connect(region, rule=rule)
     return region
+
+def is_location_enabled(world: HotLavaWorld, locationInfo: HotLavaLocationInfo):
+    match locationInfo.course_type:
+        case CourseType.Pogo:
+            return world.options.enable_pogo_stars.value == 1
+        case CourseType.TinyToy:
+            return world.options.enable_tiny_toy_stars.value == 1
+        case CourseType.Jetpack:
+            return world.options.enable_jetpack_stars.value == 1
+        case CourseType.Chase:
+            return world.options.enable_chase_the_grade_stars.value == 1
+        case CourseType.AllCourseMarathon:
+            return world.options.enable_all_course_stars.value == 1
+        case _:
+            match locationInfo.star_type:
+                case StarType.MinTime:
+                    return world.options.enable_time_stars.value == 1
+                case StarType.NoDeaths:
+                    return world.options.enable_no_deaths_stars.value == 1
+                case StarType.GoldenPin | StarType.Comic:
+                    return world.options.enable_collectible_stars.value == 1
+                case StarType.Challenge:
+                    return world.options.enable_challenge_stars.value == 1
+                case StarType.Buddy:
+                    return world.options.enable_buddy_stars.value == 1
+                case StarType.BuddyChase:
+                    return world.options.enable_buddy_chase_stars.value == 1
+                case _:
+                    return True
 
 def evaluate_has_ability(state: CollectionState, ability: str, player: int):
     if (ability == "Special"):
@@ -354,21 +393,21 @@ def build_location(world: HotLavaWorld, region: Region, locationInfo: HotLavaLoc
 def get_location_progress_type(locationInfo: HotLavaLocationInfo):
     match locationInfo.course_type:
         case CourseType.Pogo:
-            return LocationProgressType.DEFAULT
+            return LocationProgressType.PRIORITY
         case CourseType.TinyToy:
-            return LocationProgressType.DEFAULT
+            return LocationProgressType.PRIORITY
         case CourseType.Jetpack:
-            return LocationProgressType.DEFAULT
+            return LocationProgressType.PRIORITY
         case CourseType.Chase:
             return LocationProgressType.PRIORITY
         case CourseType.AllCourseMarathon:
-            return LocationProgressType.EXCLUDED
+            return LocationProgressType.DEFAULT
         case _:
             match locationInfo.star_type:
                 case StarType.CourseComplete | StarType.BuddyChase:
                     return LocationProgressType.PRIORITY
                 case StarType.Buddy:
-                    return LocationProgressType.EXCLUDED
+                    return LocationProgressType.DEFAULT
                 case _:
                     return LocationProgressType.DEFAULT
 

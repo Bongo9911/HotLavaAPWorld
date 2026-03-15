@@ -91,8 +91,18 @@ def get_locations_info_for_world(world_name) -> list[HotLavaLocationInfo]:
 
 def get_all_location_infos() -> list[HotLavaLocationInfo]:
     worlds = get_courses_by_world()
-    loc_list: list[HotLavaLocationInfo] = []
+    loc_list: list[HotLavaLocationInfo] = [*additional_locations]
     for world in worlds:
         for course in worlds[world]:
             loc_list.extend(worlds[world][course])
     return loc_list
+
+def build_location_name_groups() -> dict[str, set[str]]:
+    return {
+        world.name: {
+            world.name + " - " + course.name + " - " + star.name
+            for course in world.courses
+            for star in course.stars
+        }
+        for world in game_world_dict.values()
+    }

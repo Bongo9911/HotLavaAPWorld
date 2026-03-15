@@ -23,53 +23,53 @@ if TYPE_CHECKING:
 def set_all_rules(world: HotLavaWorld):
     enabled_worlds: list[str] = get_enabled_world_names(world)
     
-    unused_worlds = enabled_worlds.copy()
-    first_world = option_id_to_world_name[world.options.start_world.value]
-    last_world = option_id_to_world_name[world.options.last_world.value]
+    # unused_worlds = enabled_worlds.copy()
+    # first_world = option_id_to_world_name[world.options.start_world.value]
+    # last_world = option_id_to_world_name[world.options.last_world.value]
         
-    if first_world == "Random":
-        first_world = random.choice(enabled_worlds)
-        unused_worlds.remove(first_world)
-    elif first_world in enabled_worlds:
-        unused_worlds.remove(first_world)
-    else:
-        # TODO World was not in list of enabled worlds
-        pass
+    # if first_world == "Random":
+    #     first_world = random.choice(enabled_worlds)
+    #     unused_worlds.remove(first_world)
+    # elif first_world in enabled_worlds:
+    #     unused_worlds.remove(first_world)
+    # else:
+    #     # TODO World was not in list of enabled worlds
+    #     pass
         
-    if last_world == "Random":
-        last_world = random.choice(unused_worlds)
-        unused_worlds.remove(last_world)
-    elif last_world in unused_worlds:
-        unused_worlds.remove(last_world)
-    else:
-        # TODO World was not in list of enabled worlds
-        pass
+    # if last_world == "Random":
+    #     last_world = random.choice(unused_worlds)
+    #     unused_worlds.remove(last_world)
+    # elif last_world in unused_worlds:
+    #     unused_worlds.remove(last_world)
+    # else:
+    #     # TODO World was not in list of enabled worlds
+    #     pass
                     
-    world_order = "Random"
+    # world_order = "Random"
     
-    if world_order == "Random":
-        random.shuffle(unused_worlds)
+    # if world_order == "Random":
+    #     random.shuffle(unused_worlds)
         
-    if world.options.world_unlock_logic.value == world.options.world_unlock_logic.option_star_items:
-        stars_per_world: dict[str, int] = {}
+    # if world.options.world_unlock_logic.value == world.options.world_unlock_logic.option_star_items:
+    #     stars_per_world: dict[str, int] = {}
         
-        stars_per_world[first_world] = 0
+    #     stars_per_world[first_world] = 0
             
-        star_factor = 10
-        current_star_level = star_factor
+    #     star_factor = 10
+    #     current_star_level = star_factor
             
-        for world_name in unused_worlds:
-            set_stars_for_world(world, world_name, current_star_level)
-            stars_per_world[world_name] = current_star_level
-            current_star_level += star_factor
+    #     for world_name in unused_worlds:
+    #         set_stars_for_world(world, world_name, current_star_level)
+    #         stars_per_world[world_name] = current_star_level
+    #         current_star_level += star_factor
         
-        set_stars_for_world(world, last_world, current_star_level)
-        stars_per_world[last_world] = current_star_level
+    #     set_stars_for_world(world, last_world, current_star_level)
+    #     stars_per_world[last_world] = current_star_level
         
-    elif world.options.world_unlock_logic.value == world.options.world_unlock_logic.option_world_item:
-        for world_name in enabled_worlds:
-            set_rule(world.get_entrance(world_name + " Menu Item"),
-                    lambda state, world_name=world_name: state.has("World Unlock - " + world_name, world.player))
+    # elif world.options.world_unlock_logic.value == world.options.world_unlock_logic.option_world_item:
+    for world_name in enabled_worlds:
+        set_rule(world.get_entrance(world_name + " Menu Item"),
+                lambda state, world_name=world_name: state.has("World Unlock - " + world_name, world.player))
     
     for world_name in enabled_worlds:
         game_world = game_world_dict[world_name]
@@ -82,21 +82,26 @@ def set_all_rules(world: HotLavaWorld):
             #TODO waiting for rule builder to be built into exe client
             # rule: Optional[Union[Rule, Callable[[CollectionState], bool]]] = None
             
-            if world.options.force_field_logic.value == world.options.force_field_logic.option_force_field_item:
-                # rule = HasAny(*map(lambda forcefield: get_forcefield_name(world_name, forcefield), connection.force_fields))
-                rule = lambda state, ff=connection.force_fields, wn=world_name: any(state.has(get_forcefield_name(wn, forcefield), world.player) for forcefield in ff)
-            elif world.options.force_field_logic.value == world.options.force_field_logic.option_vanilla:
-                # This logic is currently not able to be expressed with rule builder
-                rule = lambda state, courses=connection.courses, gw=game_world: all(state.can_reach(get_complete_course_star_name(gw, course_name), "Location", world.player) for course_name in courses)
+            # if world.options.force_field_logic.value == world.options.force_field_logic.option_force_field_item:
+            #     # rule = HasAny(*map(lambda forcefield: get_forcefield_name(world_name, forcefield), connection.force_fields))
+            #     rule = lambda state, ff=connection.force_fields, wn=world_name: any(state.has(get_forcefield_name(wn, forcefield), world.player) for forcefield in ff)
+            # elif world.options.force_field_logic.value == world.options.force_field_logic.option_vanilla:
+            #     # This logic is currently not able to be expressed with rule builder
+            #     rule = lambda state, courses=connection.courses, gw=game_world: all(state.can_reach(get_complete_course_star_name(gw, course_name), "Location", world.player) for course_name in courses)
             
             connect_regions(world, source_region_name, target_region_name, rule=rule)    
     
     #TODO make this be a configurable option
-    goal_type = "last_world_all_courses"
+    # goal_type = "last_world_all_courses"
+    goal_type = "last_world_all_courses_trials"
+    last_world = "Master Class"
     
     if (goal_type == "last_world_all_courses"):
         victory_locations = [loc.name for loc in get_locations_info_for_world(last_world) 
             if loc.star_type == StarType.CourseComplete]
+    elif (goal_type == "last_world_all_courses_trials"):
+        victory_locations = [loc.name for loc in get_locations_info_for_world(last_world) 
+            if loc.star_type == StarType.CourseComplete or (loc.star_type == StarType.TrialComplete and loc.course_type != CourseType.AllCourseMarathon)]
     else:
         victory_locations = [loc.name for loc in get_all_location_infos() 
             if loc.star_type == StarType.CourseComplete]

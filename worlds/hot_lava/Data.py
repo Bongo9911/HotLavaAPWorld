@@ -60,9 +60,9 @@ gym_class = GameWorldInfo(
             GameStarInfo(112, "Complete in under 01:00", StarType.MinTime),
             GameStarInfo(113, "Don't perform any swings", StarType.Challenge),
             GameStarInfo(114, "No Deaths", StarType.NoDeaths),
-            GameStarInfo(115, "Grab the golden pin", StarType.GoldenPin, required_abilities=[["Special"]]), # Override to say Golden Pin requires Special only
+            GameStarInfo(115, "Grab the golden pin", StarType.GoldenPin),
             GameStarInfo(116, "Buddy Mode", StarType.Buddy),
-        ], required_abilities=[["Swing", "Special"]]), # Has Grab or a special ability
+        ], required_abilities=[["Swing", "Special"]]), # Has Swing or a special ability
         GameCourseInfo("Livin' on the Ledge", CourseType.Standard, [
             GameStarInfo(120, "Complete the course", StarType.CourseComplete),
             GameStarInfo(121, "Complete in under 02:00", StarType.MinTime),
@@ -460,7 +460,7 @@ master_class = GameWorldInfo(
             GameStarInfo(533, "No Deaths", StarType.NoDeaths),
             GameStarInfo(534, "Reach a speed of 5.5", StarType.Challenge),
             GameStarInfo(535, "Grab the golden pin", StarType.GoldenPin),
-        ]),
+        ], required_abilities=[["Special"]]),
         GameCourseInfo("Wind Tunnel Mastery", CourseType.Standard, [
             GameStarInfo(540, "Complete the course", StarType.CourseComplete),
             GameStarInfo(541, "Complete in under 01:00", StarType.MinTime),

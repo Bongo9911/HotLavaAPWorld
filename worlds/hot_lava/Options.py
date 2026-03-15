@@ -65,7 +65,7 @@ class WorldSelect(Choice):
     Select a world from the list of worlds
     """
     
-    option_random = 0
+    option_random_world = 0
     option_gym_class = 1
     option_playground = 2
     option_school = 3
@@ -91,19 +91,96 @@ class LastWorld(WorldSelect):
     display_name = "Last World"
     
     default = 5
+    
+class EnableTimeStars(Toggle):
+    """
+    Whether stars for completing a course within a certain amount of time will be enabled as checks
+    """
+    display_name = "Enable Time Stars"
+
+class EnableNoDeathsStars(Toggle):
+    """
+    Whether stars for completing a course without dying will be enabled as checks
+    """
+    display_name = "Enable No Deaths Stars"
+    
+class EnableCollectibleStars(Toggle):
+    """
+    Whether stars for picking up course collectibles (Golden Pins, G.A.T. Comics, etc.) will be enabled as checks
+    """
+    display_name = "Enable Collectible Stars"
+    
+class EnableChallengeStars(Toggle):
+    """
+    Whether stars for completing course-specific challenges (No Swinging, Reach a Target Speed, etc.) will be enabled as checks
+    """
+    display_name = "Enable Challenge Stars"
+    
+class EnablePogoStars(DefaultOnToggle):
+    """
+    Whether stars for completing Pogo trials will be enabled as checks
+    """
+    display_name = "Enable Pogo Stars"
+
+class EnableTinyToyStars(DefaultOnToggle):
+    """
+    Whether stars for completing Tiny Toy trials will be enabled as checks
+    """
+    display_name = "Enable Tiny Toy Stars"
+
+class EnableJetpackStars(DefaultOnToggle):
+    """
+    Whether stars for completing Jetpack trials will be enabled as checks
+    """
+    display_name = "Enable Jetpack Stars"
+    
+class EnableChaseTheGradeStars(DefaultOnToggle):
+    """
+    Whether stars for completing Chase the Grade trials will be enabled as checks
+    """
+    display_name = "Enable Chase the Grade Stars"
+
+class EnableAllCourseStars(Toggle):
+    """
+    Whether stars for completing All Course Marathon will be enabled as checks
+    """
+    display_name = "Enable All Course Stars"
+
+class EnableBuddyStars(Toggle):
+    """
+    Whether stars for completing courses (except chase courses) with Buddy will be enabled as checks
+    """
+    display_name = "Enable Buddy Stars"
+
+class EnableBuddyChaseStars(DefaultOnToggle):
+    """
+    Whether stars for completing chase courses with Buddy will be enabled as checks
+    """
+    display_name = "Enable Buddy Stars"
 
 @dataclass
 class HotLavaOptions(PerGameCommonOptions):
-    world_unlock_logic: WorldUnlockLogic
-    force_field_logic: ForceFieldLogic
-    enabled_worlds: EnabledWorlds
-    start_world: StartWorld
-    last_world: LastWorld
+    # world_unlock_logic: WorldUnlockLogic
+    # force_field_logic: ForceFieldLogic
+    # enabled_worlds: EnabledWorlds
+    # start_world: StartWorld
+    # last_world: LastWorld
     death_link: DeathLink
+    enable_time_stars: EnableTimeStars
+    enable_no_deaths_stars: EnableNoDeathsStars
+    enable_collectible_stars: EnableCollectibleStars
+    enable_challenge_stars: EnableChallengeStars
+    enable_pogo_stars: EnablePogoStars
+    enable_tiny_toy_stars: EnableTinyToyStars
+    enable_jetpack_stars: EnableJetpackStars
+    enable_chase_the_grade_stars: EnableChaseTheGradeStars
+    enable_all_course_stars: EnableAllCourseStars
+    enable_buddy_stars: EnableBuddyStars
+    enable_buddy_chase_stars: EnableBuddyChaseStars
     
     
 option_id_to_world_name: dict[int, str] = {
-    WorldSelect.option_random: "Random",
+    WorldSelect.option_random_world: "Random",
     WorldSelect.option_gym_class: "Gym Class",
     WorldSelect.option_playground: "Playground",
     WorldSelect.option_school: "School",
@@ -113,11 +190,12 @@ option_id_to_world_name: dict[int, str] = {
     WorldSelect.option_roccos_arcade: "Rocco's Arcade",
 }
 
-def get_enabled_world_names(world: HotLavaWorld):
-    enabled_worlds: list[str] = []
+def get_enabled_world_names(world: HotLavaWorld) -> list[str]:
+    # enabled_worlds: list[str] = []
     
-    for camel_case_name in world.options.enabled_worlds.value:
-        game_world_name = next((key for key, value in game_world_dict.items() if value.camel_case_name == camel_case_name), None)
-        enabled_worlds.append(game_world_name)
+    # for camel_case_name in world.options.enabled_worlds.value:
+    #     game_world_name = next((key for key, value in game_world_dict.items() if value.camel_case_name == camel_case_name), None)
+    #     enabled_worlds.append(game_world_name)
         
-    return enabled_worlds
+    # return enabled_worlds
+    return ["Gym Class", "Playground", "School", "Wholesale", "Master Class", "Basement", "Rocco's Arcade"]
