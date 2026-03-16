@@ -393,19 +393,19 @@ def build_location(world: HotLavaWorld, region: Region, locationInfo: HotLavaLoc
 def get_location_progress_type(locationInfo: HotLavaLocationInfo):
     match locationInfo.course_type:
         case CourseType.Pogo:
-            return LocationProgressType.PRIORITY
+            return LocationProgressType.DEFAULT
         case CourseType.TinyToy:
-            return LocationProgressType.PRIORITY
+            return LocationProgressType.DEFAULT
         case CourseType.Jetpack:
-            return LocationProgressType.PRIORITY
+            return LocationProgressType.DEFAULT
         case CourseType.Chase:
-            return LocationProgressType.PRIORITY
+            return LocationProgressType.DEFAULT
         case CourseType.AllCourseMarathon:
             return LocationProgressType.DEFAULT
         case _:
             match locationInfo.star_type:
                 case StarType.CourseComplete | StarType.BuddyChase:
-                    return LocationProgressType.PRIORITY
+                    return LocationProgressType.DEFAULT
                 case StarType.Buddy:
                     return LocationProgressType.DEFAULT
                 case _:
