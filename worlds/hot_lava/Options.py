@@ -157,6 +157,15 @@ class EnableBuddyChaseStars(DefaultOnToggle):
     Whether stars for completing chase courses with Buddy will be enabled as checks
     """
     display_name = "Enable Buddy Stars"
+    
+class TrapFillPercentage(Range):
+    """
+    The percentage of filler items in the pool to replace with traps
+    """
+    display_name = "Trap Fill Percentage"
+    range_start = 0
+    range_end = 100
+    default = 0
 
 @dataclass
 class HotLavaOptions(PerGameCommonOptions):
@@ -165,7 +174,7 @@ class HotLavaOptions(PerGameCommonOptions):
     # enabled_worlds: EnabledWorlds
     # start_world: StartWorld
     # last_world: LastWorld
-    death_link: DeathLink
+    
     enable_time_stars: EnableTimeStars
     enable_no_deaths_stars: EnableNoDeathsStars
     enable_collectible_stars: EnableCollectibleStars
@@ -177,6 +186,9 @@ class HotLavaOptions(PerGameCommonOptions):
     enable_all_course_stars: EnableAllCourseStars
     enable_buddy_stars: EnableBuddyStars
     enable_buddy_chase_stars: EnableBuddyChaseStars
+    
+    death_link: DeathLink
+    trap_fill_percentage: TrapFillPercentage
     
     
 option_id_to_world_name: dict[int, str] = {

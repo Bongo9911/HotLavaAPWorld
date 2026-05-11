@@ -1,14 +1,9 @@
-import math
-import random
 from typing import Any
-import settings
 
-from worlds.generic.Rules import set_rule
 from .Regions import create_regions_for_all_worlds
-from .Items import HotLavaItem, create_all_items, get_all_items_table
-from .Locations import build_location_name_groups, get_all_location_infos, get_location_name_to_id_for_all, get_locations_info_for_world
+from .Items import HotLavaItem, create_all_items, get_all_items_table, standard_ability_items, special_ability_items, trial_items, character_items
+from .Locations import build_location_name_groups, get_location_name_to_id_for_all
 from .Options import HotLavaOptions
-from .StarType import StarType
 from BaseClasses import CollectionState, Tutorial, ItemClassification, Region
 from ..AutoWorld import World
 from .Rules import set_all_rules
@@ -31,9 +26,10 @@ class HotLavaWorld(World):
     # from that group has been collected. Group names can also be used for !hint
     item_name_groups = {
         "Worlds": {"World Unlock - Gym Class", "World Unlock - Playground", "World Unlock - School", "World Unlock - Wholesale", "World Unlock - Master Class", "World Unlock - Basement", "World Unlock - Rocco's Arcade"},
-        "Standard Abilities": {"Crouch", "Grab", "Surf", "Wall Jump", "Swing", "Climb"},
-        "Special Abilities": {"Double Jump", "Boost Jump", "Slide Jump", "Vault Jump"},
-        "Trials": {"Pogo", "Tiny Toy", "Jetpack"},
+        "Standard Abilities": list(standard_ability_items.keys()),
+        "Special Abilities": list(special_ability_items.keys()),
+        "Trials": list(trial_items.keys()),
+        "Characters": list(character_items.keys())
     }
     
     location_name_groups = build_location_name_groups()

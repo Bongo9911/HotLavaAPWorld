@@ -80,6 +80,10 @@ character_items: dict[str, HotLavaItemData] = {
     "Leo": HotLavaItemData(53, ItemClassification.useful),
 }
 
+trap_items: dict[str, HotLavaItemData] = {
+    "Slow Trap": HotLavaItemData(70, ItemClassification.trap),
+}
+
 head_accessories: dict[str, HotLavaItemData] = {
     "Bandana Hair": HotLavaItemData(2000, ItemClassification.filler),
     "'80s Hair": HotLavaItemData(2001, ItemClassification.filler),
@@ -514,7 +518,7 @@ def get_all_items_table() -> dict[str, HotLavaItemData]:
     if (item_data_table == None):
         build_items()
         
-        item_data_table = {**filler_items, **special_ability_items, **standard_ability_items, **trial_items, **character_items, **accessory_items, **decal_items, **world_unlock_items}
+        item_data_table = {**filler_items, **special_ability_items, **standard_ability_items, **trial_items, **character_items, **trap_items, **accessory_items, **decal_items, **world_unlock_items}
         
     return item_data_table
 
@@ -576,14 +580,16 @@ def create_all_items(world: HotLavaWorld):
             
     junk = world.get_total_locations() - total_items  # calculate this based on player options
     
-    # if (world.options.world_unlock_logic.value == world.options.world_unlock_logic.option_star_items):
-    #     star_junk = math.ceil(junk * .75)
-    #     xp_junk = junk - star_junk
-    #     world.multiworld.itempool += [world.create_item("Star") for _ in range(star_junk)]
-    # else:
-    #     xp_junk = junk
+    trap_item_count = math.ceil(junk * (world.options.trap_fill_percentage / 100))
+    junk -= trap_item_count
     
-    # world.multiworld.itempool += [world.create_item("XP Shard") for _ in range(junk)]
+    trap_item_names = list(trap_items.keys())
+    
+    while(trap_item_count > 0):
+        trap_item_name = random.choice(trap_item_names)
+        item = world.create_item(trap_item_name)
+        world.multiworld.itempool.append(item)
+        trap_item_count -= 1
     
     accessory_items_names = list(accessory_items.keys())
     
