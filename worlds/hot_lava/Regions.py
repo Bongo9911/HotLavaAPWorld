@@ -379,6 +379,8 @@ def is_location_enabled(world: HotLavaWorld, locationInfo: HotLavaLocationInfo):
 def evaluate_has_ability(state: CollectionState, ability: str, player: int):
     if (ability == "Special"):
         return state.has_any(["Double Jump", "Boost Jump", "Vault Jump"], player) or state.has_all(["Slide Jump", "Crouch"], player)
+    elif(ability == "Slide Jump"):
+        return state.has_all(["Slide Jump", "Crouch"], player)
     else:
         return state.has(ability, player)
 
