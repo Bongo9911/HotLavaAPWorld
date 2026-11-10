@@ -10,9 +10,9 @@ from .Regions import connect_regions
 
 from .StarType import StarType
 from .Items import get_forcefield_name
-from .Locations import get_all_location_infos, get_locations_info_for_world
+from .Locations import HotLavaLocation, HotLavaLocationInfo, get_all_location_infos, get_locations_info_for_world, get_location_name_to_info
 
-from ..generic.Rules import set_rule
+from ..generic.Rules import add_rule, set_rule
 
 from .Options import HotLavaOptions, WorldSelect, get_enabled_world_names, option_id_to_world_name
 from .Data import GameWorldInfo, game_world_dict
@@ -20,7 +20,60 @@ from .Data import GameWorldInfo, game_world_dict
 if TYPE_CHECKING:
     from .World import HotLavaWorld
 
-def set_all_rules(world: HotLavaWorld):
+# the full region name a Buddy/BuddyChase location's buddy AI must have walked over to reach it,
+# or None if world_name has no Buddy/BuddyChase stars
+def get_buddy_hub_region_name(world_name: str) -> str | None:
+    buddy_hub_region = game_world_dict[world_name].buddy_hub_region
+    if buddy_hub_region is None:
+        return None
+    return world_name + " - " + buddy_hub_region
+
+def evaluate_has_ability(state: CollectionState, ability: str, player: int):
+    if (ability == "Special"):
+        return state.has_any(["Double Jump", "Boost Jump", "Vault Jump"], player) or state.has_all(["Slide Jump", "Crouch"], player)
+    elif(ability == "Slide Jump"):
+        return state.has_all(["Slide Jump", "Crouch"], player)
+    else:
+        return state.has(ability, player)
+
+def set_location_access_rules(world: HotLavaWorld):
+    location_infos = get_location_name_to_info()
+
+    for location in world.multiworld.get_locations(world.player):
+        if not isinstance(location, HotLavaLocation):
+            continue
+
+        location_info = location_infos.get(location.name)
+        if location_info is None:
+            continue
+
+        if location_info.star_type == StarType.Buddy or location_info.star_type == StarType.BuddyChase:
+            add_rule(location, lambda state: state.has("Grab", world.player))
+
+            hub_region_name = get_buddy_hub_region_name(location_info.world_name)
+            if hub_region_name is not None:
+                # the buddy sub-region has exactly one entrance: the one created for it in Regions.py
+                buddy_entrance = location.parent_region.entrances[0]
+                add_rule(buddy_entrance, lambda state, hub=hub_region_name: state.can_reach_region(hub, world.player))
+
+        if location_info.course_type == CourseType.Pogo:
+            add_rule(location, lambda state: state.has("Pogo", world.player))
+        elif location_info.course_type == CourseType.TinyToy:
+            add_rule(location, lambda state: state.has("Tiny Toy", world.player))
+        elif location_info.course_type == CourseType.Jetpack:
+            add_rule(location, lambda state: state.has("Jetpack", world.player))
+
+        required_abilities = location_info.required_abilities
+        if required_abilities is not None:
+            add_rule(location, lambda state, required_abilities=required_abilities: all(
+                any(evaluate_has_ability(state, ability, world.player) for ability in or_group)
+                for or_group in required_abilities
+            ))
+
+    set_rule(world.get_entrance("Rocco's Arcade - Arcade -> Rocco's Arcade - Arcade Rafters"),
+                lambda state: state.has_all(["Climb", "Swing"], world.player))
+
+def set_rules(world: HotLavaWorld):
     enabled_worlds: list[str] = get_enabled_world_names(world)
     
     # unused_worlds = enabled_worlds.copy()
@@ -107,8 +160,10 @@ def set_all_rules(world: HotLavaWorld):
             if loc.star_type == StarType.CourseComplete]
     
     world.multiworld.completion_condition[world.player] = lambda state: all(
-        state.can_reach(world.get_location(loc), "Location", world.player) 
+        state.can_reach(world.get_location(loc), "Location", world.player)
         for loc in victory_locations)
+
+    set_location_access_rules(world)
     
 def set_stars_for_world(world: HotLavaWorld, world_name: str, star_level: int):
     set_rule(world.get_entrance(world_name + " Menu Item"),

@@ -2,8 +2,6 @@ from __future__ import annotations
 
 from typing import Callable, Optional, TYPE_CHECKING
 
-from worlds.generic.Rules import add_rule
-
 from .Data import GameCourseInfo, GameStarInfo, game_world_dict
 from .Locations import HotLavaLocation, HotLavaLocationInfo, get_locations_info_for_course
 from .CourseType import CourseType
@@ -33,7 +31,7 @@ def create_intro_regions(world: HotLavaWorld, menu_region: Region) -> None:
 
 def create_gym_class_regions(world: HotLavaWorld, menu_region: Region) -> None:
     world_name = "Gym Class"
-    buddy_region_base = "Side Entrance"
+    buddy_region_base = game_world_dict[world_name].buddy_hub_region
     buddy_region_name = world_name + " - " + buddy_region_base
     
     world_region = create_world_region(world, menu_region, world_name)
@@ -70,7 +68,7 @@ def create_gym_class_regions(world: HotLavaWorld, menu_region: Region) -> None:
     
 def create_playground_regions(world: HotLavaWorld, menu_region: Region) -> None:
     world_name = "Playground"
-    buddy_region_base = "Sports Day Side"
+    buddy_region_base = game_world_dict[world_name].buddy_hub_region
     buddy_region_name = world_name + " - " + buddy_region_base
     
     world_region = create_world_region(world, menu_region, world_name)
@@ -102,7 +100,7 @@ def create_playground_regions(world: HotLavaWorld, menu_region: Region) -> None:
     
 def create_school_regions(world: HotLavaWorld, menu_region: Region) -> None:
     world_name = "School"
-    buddy_region_base = "Cafeteria"
+    buddy_region_base = game_world_dict[world_name].buddy_hub_region
     buddy_region_name = world_name + " - " + buddy_region_base
     
     world_region = create_world_region(world, menu_region, world_name)
@@ -166,7 +164,7 @@ def create_school_regions(world: HotLavaWorld, menu_region: Region) -> None:
     
 def create_wholesale_regions(world: HotLavaWorld, menu_region: Region) -> None:
     world_name = "Wholesale"
-    buddy_region_base = "Shopping Area"
+    buddy_region_base = game_world_dict[world_name].buddy_hub_region
     buddy_region_name = world_name + " - " + buddy_region_base
     
     world_region = create_world_region(world, menu_region, world_name)
@@ -231,7 +229,7 @@ def create_master_class_regions(world: HotLavaWorld, menu_region: Region) -> Non
     
 def create_basement_regions(world: HotLavaWorld, menu_region: Region) -> None:
     world_name = "Basement"
-    buddy_region_base = "Den"
+    buddy_region_base = game_world_dict[world_name].buddy_hub_region
     buddy_region_name = world_name + " - " + buddy_region_base
     
     world_region = create_world_region(world, menu_region, world_name)
@@ -269,7 +267,7 @@ def create_basement_regions(world: HotLavaWorld, menu_region: Region) -> None:
     
 def create_roccos_arcade_regions(world: HotLavaWorld, menu_region: Region) -> None:
     world_name = "Rocco's Arcade"
-    buddy_region_base = "Arcade Rafters"
+    buddy_region_base = game_world_dict[world_name].buddy_hub_region
     buddy_region_name = world_name + " - " + buddy_region_base
     
     world_region = create_world_region(world, menu_region, world_name)
@@ -279,8 +277,7 @@ def create_roccos_arcade_regions(world: HotLavaWorld, menu_region: Region) -> No
     # menu_region.connect(arcade_region, rule=lambda collection: collection.has("World Unlock - " + world_name, world.player))
     
     arcade_rafters_region = create_region_for_world(world, world_name, "Arcade Rafters")
-    arcade_rafters_entrance = arcade_region.connect(arcade_rafters_region)
-    add_rule(arcade_rafters_entrance, lambda state: state.has_all(["Climb", "Swing"], world.player))
+    arcade_region.connect(arcade_rafters_region)
     
     create_region_for_course(world, world_name, "Arcade Action", arcade_region, buddy_region_name)
     create_region_for_course(world, world_name, "Rocco's Rumpus Room", arcade_region, buddy_region_name)
@@ -317,31 +314,17 @@ def create_region_for_course(world: HotLavaWorld, world_name: str, course_name: 
     for locationInfo in locationsInfo:
         if (not is_location_enabled(world, locationInfo)):
             continue
-        
+
         if ((locationInfo.star_type == StarType.Buddy or locationInfo.star_type == StarType.BuddyChase) and buddy_region_name != None):
             buddy_region = Region(world_name + " - " + course_name + " - Buddy", world.player, world.multiworld)
             location = build_location(world, buddy_region, locationInfo)
-            add_rule(location, lambda state: state.has_all({"Grab"}, world.player))
             buddy_region.locations.append(location)
             world.multiworld.regions.append(buddy_region)
-            region.connect(buddy_region, rule=lambda collection: collection.can_reach_region(buddy_region_name, world.player))
+            region.connect(buddy_region)
         else:
             location = build_location(world, region, locationInfo)
             region.locations.append(location)
-            
-        if (locationInfo.course_type == CourseType.Pogo):
-            add_rule(location, lambda state: state.has("Pogo", world.player))
-        elif (locationInfo.course_type == CourseType.TinyToy):
-            add_rule(location, lambda state: state.has("Tiny Toy", world.player))
-        elif (locationInfo.course_type == CourseType.Jetpack):
-            add_rule(location, lambda state: state.has("Jetpack", world.player))
-            
-        if (locationInfo.required_abilities != None):
-            add_rule(location, lambda state, required_abilities=locationInfo.required_abilities: all(
-                any(evaluate_has_ability(state, ability, world.player) for ability in or_group)
-                for or_group in required_abilities
-            ))            
-        
+
     world.multiworld.regions.append(region)
     
     parent_region.connect(region, rule=rule)
@@ -375,14 +358,6 @@ def is_location_enabled(world: HotLavaWorld, locationInfo: HotLavaLocationInfo):
                     return world.options.enable_buddy_chase_stars.value == 1
                 case _:
                     return True
-
-def evaluate_has_ability(state: CollectionState, ability: str, player: int):
-    if (ability == "Special"):
-        return state.has_any(["Double Jump", "Boost Jump", "Vault Jump"], player) or state.has_all(["Slide Jump", "Crouch"], player)
-    elif(ability == "Slide Jump"):
-        return state.has_all(["Slide Jump", "Crouch"], player)
-    else:
-        return state.has(ability, player)
 
 def build_location(world: HotLavaWorld, region: Region, locationInfo: HotLavaLocationInfo) -> HotLavaLocation:
     location = HotLavaLocation(world.player, locationInfo.name, locationInfo.id, region)

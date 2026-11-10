@@ -6,7 +6,7 @@ from .Locations import build_location_name_groups, get_location_name_to_id_for_a
 from .Options import HotLavaOptions
 from BaseClasses import CollectionState, Tutorial, ItemClassification, Region
 from ..AutoWorld import World
-from .Rules import set_all_rules
+from .Rules import set_rules
 
 class HotLavaWorld(World):
     """Hot Lava is 3D parkour-platformer game developed by Klei Entertainment inspired by the classic kids' game 'The Floor is Lava'"""
@@ -71,7 +71,7 @@ class HotLavaWorld(World):
         return len(self.multiworld.get_locations(self.player))
 
     def set_rules(self) -> None:
-        set_all_rules(self)
+        set_rules(self)
         
     def fill_slot_data(self) -> dict[str, Any]: 
         return self.options.as_dict(

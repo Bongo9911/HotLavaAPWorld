@@ -13,13 +13,15 @@ class HotLavaLocationInfo():
     course_type: CourseType
     star_type: StarType
     required_abilities: list[list[str]] | None
-    
-    def __init__(self, id, name, course_type, star_type, required_abilities = None):
+    world_name: str | None
+
+    def __init__(self, id, name, course_type, star_type, required_abilities = None, world_name = None):
         self.id = id
         self.name = name
         self.course_type = course_type
         self.star_type = star_type
         self.required_abilities = required_abilities
+        self.world_name = world_name
 
 courses_by_world: dict[str, dict[str, list[HotLavaLocationInfo]]] = None
 
@@ -40,11 +42,11 @@ def build_locations():
             
             for star in course.stars:
                 name: str = world.name + " - " + course.name + " - " + star.name
-                if(star.required_abilities != None):
+                if star.required_abilities is not None:
                     required_abilities = star.required_abilities
                 else:
                     required_abilities = course.required_abilities
-                location: HotLavaLocationInfo = HotLavaLocationInfo(star.id, name, course.course_type, star.star_type, required_abilities)
+                location: HotLavaLocationInfo = HotLavaLocationInfo(star.id, name, course.course_type, star.star_type, required_abilities, world.name)
                 location_list.append(location)
         
     return courses_by_world
@@ -96,6 +98,9 @@ def get_all_location_infos() -> list[HotLavaLocationInfo]:
         for course in worlds[world]:
             loc_list.extend(worlds[world][course])
     return loc_list
+
+def get_location_name_to_info() -> dict[str, HotLavaLocationInfo]:
+    return {location.name: location for location in get_all_location_infos()}
 
 def build_location_name_groups() -> dict[str, set[str]]:
     return {

@@ -55,6 +55,8 @@ standard_ability_items: dict[str, HotLavaItemData] = {
     "Wall Jump": HotLavaItemData(23, ItemClassification.progression),
     "Swing": HotLavaItemData(24, ItemClassification.progression),
     "Climb": HotLavaItemData(25, ItemClassification.progression),
+    "Wind Tunnels": HotLavaItemData(26, ItemClassification.progression),
+    "Trampolines": HotLavaItemData(27, ItemClassification.progression),
 }
 
 trial_items: dict[str, HotLavaItemData] = {
